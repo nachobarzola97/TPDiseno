@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionListener;
+import java.time.LocalDateTime;
 import java.awt.event.ActionEvent;
 
 import gestores.*;
@@ -134,18 +135,19 @@ public class RegistroTicketB extends JPanel {
 					gestorTicket.setObservaciones(t, textObservaciones.getText() );
 					
 					if(comboBoxEstado.getSelectedItem()=="Cerrado") {
-						gestorTicket.cerrarTicket(t);
+						gestorTicket.cerrarTicket(t, frame.getSesion());
 					}
 					else if(comboBoxEstado.getSelectedItem()=="Abierto derivado grupo"){
 						String grupo=comboBoxGrupo.getSelectedItem().toString();
-						gestorTicket.derivarTicket(t, grupo);	
+						GrupoResolucion g = gestorDB.recuperarGrupo(grupo);
+						
+						gestorTicket.derivarTicket(t, g, frame.getSesion());	
 					}
 					
+					LocalDateTime now = LocalDateTime.now();
+					gestorTicket.setTiempoEnMesa(t, now);
 					
-					JOptionPane.showMessageDialog(frame, "Cambios guardados", "Exito", JOptionPane.INFORMATION_MESSAGE);
-					
-					
-					
+					JOptionPane.showMessageDialog(frame, "Cambios guardados", "Exito", JOptionPane.INFORMATION_MESSAGE);	
 				}
 			}
 		});

@@ -85,6 +85,10 @@ public class Ticket {
 	public void agregarHistorialClasificacion(HistorialClasificacion hc) {
 		historialClasificacion.add(hc);
 	}
+	
+	public void agregarIntervencion(Intervencion i) {
+		intervenciones.add(i);
+	}
 }
 
 
