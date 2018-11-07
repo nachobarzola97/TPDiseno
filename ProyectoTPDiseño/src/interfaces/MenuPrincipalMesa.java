@@ -26,6 +26,7 @@ public class MenuPrincipalMesa extends JFrame {
 	private RegistroTicketA registroA;
 	private RegistroTicketB registroB;
 	private RegistroTicketB registroBaux;
+	private Menu menu;
 	private CardLayout cardLayout= new CardLayout();
 	private DTOTicket ticketEnProceso;
 	private boolean guiSeleccionada;
@@ -47,6 +48,7 @@ public class MenuPrincipalMesa extends JFrame {
 		registroA = new RegistroTicketA(this);
 		registroB = new RegistroTicketB(this);
 		registroBaux = new RegistroTicketB(this);
+		menu = new Menu(); //ver porque no andaba el constructor del menu
 		
 		contentPane.add(registroA,"1");
 		contentPane.add(registroB,"2");
@@ -85,6 +87,13 @@ public class MenuPrincipalMesa extends JFrame {
 			case 2:
 				cardLayout.show(contentPane, "2");
 				break;
+		}
+	}
+	
+	public void cambiarVentanaMenu(int n) {
+		switch(n) {
+		case 1: //Registrar Ticket
+			cardLayout.show(contentPane, "1");
 		}
 	}
 		
