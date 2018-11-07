@@ -123,17 +123,16 @@ public class Login extends JFrame {
 		JButton btnIniciarSeccin = new JButton("Iniciar sesi\u00F3n");
 		btnIniciarSeccin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				GestorDB gestorDB = new GestorDB();
+				/*GestorDB gestorDB = new GestorDB();
 				
 				gestorDB.connectDatabase();
 				Usuario usr = gestorDB.seleccionarUsuario(textPane.getText());
 				gestorDB.cerrarConexion();
 				
 				
-				Sesion sesion = new Sesion(usr);
+				Sesion sesion = new Sesion(usr);*/
 				MenuPrincipalMesa menu = new MenuPrincipalMesa();
 				menu.setVisible(true);
-				//TODO: CerrarVentanaLogin
 				
 				
 				

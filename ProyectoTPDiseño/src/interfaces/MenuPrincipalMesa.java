@@ -50,33 +50,16 @@ public class MenuPrincipalMesa extends JFrame {
 		registroBaux = new RegistroTicketB(this);
 		menu = new Menu(); //ver porque no andaba el constructor del menu
 		
+		contentPane.add(menu, "3");
 		contentPane.add(registroA,"1");
 		contentPane.add(registroB,"2");
 		contentPane.add(registroBaux,"3");
 		guiSeleccionada = true;
 		System.out.println();
 		
-		JButton btnNewButton = new JButton("Registrar Ticket");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				cardLayout.show(contentPane, "1");
-			}
-		});
-		btnNewButton.setBounds(130, 48, 149, 23);
-		contentPane.add(btnNewButton);
-		
-		JButton btnNewButton_1 = new JButton("Consultar Ticket");
-		btnNewButton_1.setBounds(130, 95, 147, 23);
-		contentPane.add(btnNewButton_1);
-		
-		JButton btnNewButton_2 = new JButton("Cerrar Ticket");
-		btnNewButton_2.setBounds(130, 143, 147, 23);
-		contentPane.add(btnNewButton_2);
-		
-		JButton btnNewButton_3 = new JButton("Derivar Ticket");
-		btnNewButton_3.setBounds(130, 189, 147, 23);
-		contentPane.add(btnNewButton_3);
 	}
+		
+		
 	
 	public void cambiarVentana(int n,DTOTicket dtoTicket) {
 		this.ticketEnProceso=dtoTicket;
@@ -89,6 +72,12 @@ public class MenuPrincipalMesa extends JFrame {
 				break;
 		}
 	}
+	
+	public void cambiarVentanaMenu(int n) {
+		switch(n) {
+		case 1: //Registrar Ticket
+			cardLayout.show(contentPane, "1");
+		}
 	
 	public void cambiarVentanaMenu(int n) {
 		switch(n) {
