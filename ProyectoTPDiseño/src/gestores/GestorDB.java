@@ -234,6 +234,22 @@ public class GestorDB {
 		return clasific;
 	}
 	
+	public void guardarTicket(Ticket t) {
+		try{
+			String sql = "";
+			Statement sentencia = this.connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_READ_ONLY);				
+			sentencia.executeQuery(sql);
+		}
+		catch(java.sql.SQLException sqle) {
+			System.out.println("Error al seleccionar");
+			sqle.printStackTrace();
+		}
+	}
+	
+	public Ticket recuperarTicket(int nroTicket) {
+		return null;
+	}
+	
 	public void seleccionar() {
 		try{
 			String sql = "SELECT nroTicket FROM Ticket;";
