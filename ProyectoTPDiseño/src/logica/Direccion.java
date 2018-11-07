@@ -8,15 +8,20 @@ public class Direccion {
 	String oficina;
 	String ciudad;
 	String provincia;
-	
-	public Direccion(String calle, String numero, String piso) {
+
+	public Direccion() {
+		
+	}
+
+	public Direccion(String calle, String numero, String piso, String oficina, String ciudad, String provincia) {
 		super();
 		this.calle = calle;
 		this.numero = numero;
 		this.piso = piso;
+		this.oficina = oficina;
+		this.ciudad = ciudad;
+		this.provincia = provincia;
 	}
-
-	public Direccion() {}
 
 	public String getCalle() {
 		return calle;
