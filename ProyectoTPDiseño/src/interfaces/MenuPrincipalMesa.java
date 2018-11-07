@@ -9,9 +9,14 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import logica.util.*;
+import logica.*;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class MenuPrincipalMesa extends JFrame {
 
@@ -76,10 +81,20 @@ public class MenuPrincipalMesa extends JFrame {
 			case 2:
 				cardLayout.show(contentPane, "2");
 				break;
-		
+		}
 		}
 		
-	}
+		public void refreshVentana(List<GrupoResolucion> grupos, List<Clasificacion> clas, int i) {
+			JComboBox combo = new JComboBox();
+			for (GrupoResolucion g : grupos) {
+				combo.addItem(g);
+			}
+			registroB.setComboBoxGrupo(combo, clas);
+			registroB.keepSelectedClass(i);
+			cardLayout.show(contentPane, "2");
+			};
+		
+	
 	public DTOTicket getTicketEnProceso() {
 		return ticketEnProceso;
 	}
