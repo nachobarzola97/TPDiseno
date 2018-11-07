@@ -11,6 +11,7 @@ public class Intervencion {
 	long tiempoTrabajado;
 	EstadoIntervencion estado;
 	String Observaciones;
+	Usuario actor;
 	
 	public void Intervencion() {};
 	
@@ -84,8 +85,22 @@ public class Intervencion {
 
 	public void setObservaciones(String observaciones) {
 		Observaciones = observaciones;
-	};
+	}
+
+
+
+	public Usuario getActor() {
+		return actor;
+	}
+
+
+
+	public void setActor(Usuario actor) {
+		this.actor = actor;
+	}
 	
+	
+
 	
 
 }
