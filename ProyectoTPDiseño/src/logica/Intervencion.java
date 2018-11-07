@@ -13,10 +13,10 @@ public class Intervencion {
 	String Observaciones;
 	Usuario actor;
 	
-	public void Intervencion() {};
+	public Intervencion() {
+		
+	}
 	
-	
-
 	public Intervencion(Ticket ticket, LocalDateTime fechaAsignacion, LocalDateTime fechaInicioTrabajo,
 			LocalDateTime fechaFinal, long tiempoTrabajado, EstadoIntervencion estado, String observaciones) {
 		super();

@@ -15,11 +15,6 @@ public class Ticket {
 	Empleado demandante;
 	List<HistorialClasificacion> historialClasificacion;
 	
-<<<<<<< HEAD
-	public Ticket() {
-		
-	}
-	
 	public Ticket(int nroTicket, String descripcion, LocalDateTime fechaApertura, String observaciones, long tiempoEnMesa, List<Intervencion> intervenciones, Usuario actorMesa, List<HistorialEstadoTicket> historialEstadoTicket, Empleado demandante, List<HistorialClasificacion> historialClasificacion) {
 		super();
 		this.nroTicket = nroTicket;
@@ -34,10 +29,10 @@ public class Ticket {
 		this.historialClasificacion = historialClasificacion;
 	}
 
-=======
-	public Ticket() {};
+	public Ticket() {
+		
+	};
 	
->>>>>>> Tami
 	public int getNroTicket() {
 		return nroTicket;
 	}
@@ -106,13 +101,10 @@ public class Ticket {
 	public void agregarHistorialClasificacion(HistorialClasificacion hc) {
 		historialClasificacion.add(hc);
 	}
-<<<<<<< HEAD
-=======
 	
 	public void agregarIntervencion(Intervencion i) {
 		intervenciones.add(i);
 	}
->>>>>>> Tami
 }
 
 

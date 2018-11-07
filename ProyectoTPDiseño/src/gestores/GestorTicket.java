@@ -2,13 +2,10 @@ package gestores;
 import logica.util.*;
 import logica.*;
 import java.util.List;
-<<<<<<< HEAD
 import java.util.ArrayList;
-=======
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.time.temporal.ChronoUnit;
->>>>>>> Tami
 
 public class GestorTicket {
 	
@@ -61,8 +58,6 @@ public class GestorTicket {
 
 	public void setObservaciones(Ticket t, String o) {
 		t.setObservaciones(o);
-<<<<<<< HEAD
-=======
 	}
 	
 	public void cerrarTicket(Ticket t, Sesion s) {
@@ -158,7 +153,6 @@ public class GestorTicket {
 		gestorDB.connectDatabase();
 		gestorDB.guardarTicket(t);
 		gestorDB.cerrarConexion();
->>>>>>> Tami
 	}
 
 }

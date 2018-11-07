@@ -7,6 +7,8 @@ import logica.util.EstadoGrupoResolucion;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 public class GestorDB {
 	private Connection connection;
@@ -236,7 +238,14 @@ public class GestorDB {
 	
 	public void guardarTicket(Ticket t) {
 		try{
-			String sql = "INSERT INTO TICKET VALUES (" + t.getNroTicket() + ',' + t.getDescripcion() + ',' + t.getObservaciones() + ',' + t.getFechaApertura() + ',' + "'null'" + ',' + t.getDemandante().getNroLegajo() + ");";  
+			String hora = "'" + t.getFechaApertura().getHour() + ':' + t.getFechaApertura().getMinute() + ':' + t.getFechaApertura().getSecond() + "'";
+			String fecha = "'" + t.getFechaApertura().getYear() + '-' + t.getFechaApertura().getMonthValue() + '-' + t.getFechaApertura().getDayOfMonth() + "'";
+			String desc = "'" + t.getDescripcion() + "'";
+			String obs = "'" + t.getDescripcion() + "'";
+			String nroL = "'" + t.getDemandante().getNroLegajo() + "'";
+			
+			String sql = "INSERT INTO TICKET VALUES (" + t.getNroTicket() + ',' + desc + ',' + obs + ',' + fecha + ',' + hora + ", 0," + nroL + ");";
+			System.out.println("Consulta: "+sql);
 			Statement sentencia = this.connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_READ_ONLY);				
 			sentencia.executeQuery(sql);
 			

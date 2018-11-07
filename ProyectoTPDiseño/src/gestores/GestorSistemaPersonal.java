@@ -8,7 +8,7 @@ public class GestorSistemaPersonal {
 	 GestorDB gestorDB = new GestorDB();
 		
 		gestorDB.connectDatabase();
-		boolean existe = gestorDB.consultaEmpleado(legajo);
+		boolean existe = gestorDB.existeEmpleado(legajo);
 		gestorDB.cerrarConexion();
 		
 		return true;

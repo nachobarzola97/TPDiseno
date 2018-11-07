@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class PruebaGestor {
 	public static void main(String[] args) {
 		
-		Ticket t = new Ticket(56, "aaa", LocalDateTime.of(2018, 10, 12, 12, 15, 43), "obs", 123, new ArrayList<Intervencion>(), null, new ArrayList<HistorialEstadoTicket>(), null, new ArrayList<HistorialClasificacion>());
+		Ticket t = new Ticket(56, "aaa", LocalDateTime.of(2018, 10, 12, 12, 15, 43), "obs", 123, new ArrayList<Intervencion>(), new Usuario(), new ArrayList<HistorialEstadoTicket>(), new Empleado(), new ArrayList<HistorialClasificacion>());
 		GestorDB gestor = new GestorDB();
 		gestor.connectDatabase();
 		gestor.guardarTicket(t);
