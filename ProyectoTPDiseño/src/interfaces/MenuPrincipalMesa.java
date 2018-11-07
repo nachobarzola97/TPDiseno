@@ -56,7 +56,7 @@ public class MenuPrincipalMesa extends JFrame {
 		contentPane.add(menu, "3");
 		contentPane.add(registroA,"1");
 		contentPane.add(registroB,"2");
-		contentPane.add(registroBaux,"3");
+		contentPane.add(registroBaux,"4");
 		guiSeleccionada = true;
 		System.out.println();
 		
@@ -80,6 +80,9 @@ public class MenuPrincipalMesa extends JFrame {
 		switch(n) {
 		case 1: //Registrar Ticket
 			cardLayout.show(contentPane, "1");
+			break;
+		case 3: //volver al menu
+			cardLayout.show(contentPane, "3");
 		}
 	}
 		
@@ -92,7 +95,7 @@ public class MenuPrincipalMesa extends JFrame {
 			guiSeleccionada = !guiSeleccionada;
 			registroBaux.setComboBoxGrupo(combo, clas);
 			registroBaux.keepSelectedClass(i);
-			cardLayout.show(contentPane, "3");
+			cardLayout.show(contentPane, "4");
 			System.out.println("Llego");
 		}
 		else {

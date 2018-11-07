@@ -34,6 +34,11 @@ public class Menu extends JPanel {
 	private JFrame frame;
 	
 	public Menu(JFrame f) {
+<<<<<<< HEAD
+=======
+		this.frame=f;
+		setLayout(null);	
+>>>>>>> Tami
 		
 	frame = f;
 	setLayout(null);
