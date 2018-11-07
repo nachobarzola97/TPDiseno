@@ -25,9 +25,10 @@ public class MenuPrincipalMesa extends JFrame {
 	private JPanel contentPane;
 	private RegistroTicketA registroA;
 	private RegistroTicketB registroB;
+	private RegistroTicketB registroBaux;
 	private CardLayout cardLayout= new CardLayout();
 	private DTOTicket ticketEnProceso;
-
+	private boolean guiSeleccionada;
 
 
 	/**
@@ -45,10 +46,13 @@ public class MenuPrincipalMesa extends JFrame {
 		
 		registroA = new RegistroTicketA(this);
 		registroB = new RegistroTicketB(this);
+		registroBaux = new RegistroTicketB(this);
 		
 		contentPane.add(registroA,"1");
 		contentPane.add(registroB,"2");
-		
+		contentPane.add(registroBaux,"3");
+		guiSeleccionada = true;
+		System.out.println();
 		
 		JButton btnNewButton = new JButton("Registrar Ticket");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -89,9 +93,20 @@ public class MenuPrincipalMesa extends JFrame {
 			for (GrupoResolucion g : grupos) {
 				combo.addItem(g);
 			}
-			registroB.setComboBoxGrupo(combo, clas);
-			registroB.keepSelectedClass(i);
-			cardLayout.show(contentPane, "2");
+			if(guiSeleccionada) {
+				guiSeleccionada = !guiSeleccionada;
+				registroBaux.setComboBoxGrupo(combo, clas);
+				registroBaux.keepSelectedClass(i);
+				cardLayout.show(contentPane, "3");
+				System.out.println("Llego");
+			}
+			else {
+				guiSeleccionada = !guiSeleccionada;
+				registroB.setComboBoxGrupo(combo, clas);
+				registroB.keepSelectedClass(i);
+				cardLayout.show(contentPane, "2");
+				System.out.println("Llego 2");
+			}
 			};
 		
 	

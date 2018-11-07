@@ -74,22 +74,28 @@ public class RegistroTicketB extends JPanel {
 			JComboBoxClasificacion.addItem(c.getNombre());
 		}
 		JComboBoxClasificacion.setBounds(179, 143, 183, 20);
-		this.add(JComboBoxClasificacion);
 		
-		comboBoxGrupo = new JComboBox();
-		comboBoxGrupo.setBounds(179, 168, 183, 20);
-		comboBoxGrupo.addActionListener(new ActionListener() {
+		JComboBoxClasificacion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				List<GrupoResolucion> grup = new ArrayList<GrupoResolucion>();
 				int i = JComboBoxClasificacion.getSelectedIndex();
 				for (Clasificacion c : clasificacionesTicket){
-					if (c.getNombre() == comboBoxGrupo.getSelectedItem())
+					if (c.getNombre().equals(JComboBoxClasificacion.getSelectedItem())) {
 						grup.addAll(c.getGrupos());
+						for(GrupoResolucion gr : c.getGrupos()) {
+						}
+					}
 				}
 				frame.refreshVentana(grup, clasificacionesTicket, i);
 				
 			}
 		});
+		
+		this.add(JComboBoxClasificacion);
+		
+		comboBoxGrupo = new JComboBox();
+		comboBoxGrupo.setBounds(179, 168, 183, 20);
+		
 		this.add(comboBoxGrupo);
 		
 		
