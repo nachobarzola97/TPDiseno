@@ -15,6 +15,7 @@ public class Ticket {
 	Empleado demandante;
 	List<HistorialClasificacion> historialClasificacion;
 	
+<<<<<<< HEAD
 	public Ticket() {
 		
 	}
@@ -33,6 +34,10 @@ public class Ticket {
 		this.historialClasificacion = historialClasificacion;
 	}
 
+=======
+	public Ticket() {};
+	
+>>>>>>> Tami
 	public int getNroTicket() {
 		return nroTicket;
 	}
@@ -101,4 +106,14 @@ public class Ticket {
 	public void agregarHistorialClasificacion(HistorialClasificacion hc) {
 		historialClasificacion.add(hc);
 	}
+<<<<<<< HEAD
+=======
+	
+	public void agregarIntervencion(Intervencion i) {
+		intervenciones.add(i);
+	}
+>>>>>>> Tami
 }
+
+
+

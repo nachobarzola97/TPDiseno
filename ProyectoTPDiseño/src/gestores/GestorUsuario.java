@@ -15,4 +15,8 @@ public class GestorUsuario {
 	public Usuario getUser(Sesion s) {
 		return s.getUser();
 	}
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> Tami
