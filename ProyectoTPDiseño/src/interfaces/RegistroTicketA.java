@@ -123,6 +123,11 @@ public class RegistroTicketA extends JPanel {
 		this.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Cancelar");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				((MenuPrincipalMesa)frame).cambiarVentanaMenu(3);
+			}
+		});
 		btnNewButton_1.setBounds(295, 212, 92, 23);
 		this.add(btnNewButton_1);
 	}

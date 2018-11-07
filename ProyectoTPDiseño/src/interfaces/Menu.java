@@ -32,11 +32,10 @@ import javax.swing.SwingConstants;
 
 public class Menu extends JPanel {
 	private JFrame frame;
-	private CardLayout cardLayout;
 	
 	public Menu(JFrame f) {
-	
-	cardLayout = new CardLayout();	
+		this.frame=f;
+		setLayout(null);	
 		
 	JButton btnNewButton = new JButton("Registrar Ticket");
 	btnNewButton.addActionListener(new ActionListener() {
