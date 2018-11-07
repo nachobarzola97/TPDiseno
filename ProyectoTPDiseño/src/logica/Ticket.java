@@ -15,8 +15,24 @@ public class Ticket {
 	Empleado demandante;
 	List<HistorialClasificacion> historialClasificacion;
 	
-	public Ticket() {};
+	public Ticket() {
+		
+	}
 	
+	public Ticket(int nroTicket, String descripcion, LocalDateTime fechaApertura, String observaciones, long tiempoEnMesa, List<Intervencion> intervenciones, Usuario actorMesa, List<HistorialEstadoTicket> historialEstadoTicket, Empleado demandante, List<HistorialClasificacion> historialClasificacion) {
+		super();
+		this.nroTicket = nroTicket;
+		this.descripcion = descripcion;
+		this.fechaApertura = fechaApertura;
+		this.observaciones = observaciones;
+		this.tiempoEnMesa = tiempoEnMesa;
+		this.intervenciones = intervenciones;
+		this.actorMesa = actorMesa;
+		this.historialEstadoTicket = historialEstadoTicket;
+		this.demandante = demandante;
+		this.historialClasificacion = historialClasificacion;
+	}
+
 	public int getNroTicket() {
 		return nroTicket;
 	}

@@ -252,6 +252,10 @@ public class GestorDB {
 		return null;
 	}
 	
+	public GrupoResolucion recuperarGrupo(String groupName) {
+		return null;
+	}
+	
 	public void seleccionar() {
 		try{
 			String sql = "SELECT nroTicket FROM Ticket;";
