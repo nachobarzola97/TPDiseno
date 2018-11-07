@@ -150,6 +150,11 @@ public class GestorDB {
 		return us;
 	}
 	
+	public boolean existeEmpleado(String legajo) {
+		
+		return true;
+	}
+	
 	public void seleccionar() {
 		try{
 			String sql = "SELECT nroTicket FROM Ticket;";
