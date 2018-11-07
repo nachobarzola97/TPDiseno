@@ -20,14 +20,12 @@ import java.util.List;
 
 public class MenuPrincipalMesa extends JFrame {
 
-
-
 	private JPanel contentPane;
 	private RegistroTicketA registroA;
 	private RegistroTicketB registroB;
 	private RegistroTicketB registroBaux;
 	private Menu menu;
-	private CardLayout cardLayout= new CardLayout();
+	private CardLayout cardLayout;
 	private DTOTicket ticketEnProceso;
 	private boolean guiSeleccionada;
 
@@ -36,6 +34,8 @@ public class MenuPrincipalMesa extends JFrame {
 	 * Create the frame.
 	 */
 	public MenuPrincipalMesa() {
+		cardLayout = new CardLayout();
+		
 		setTitle("Mesa de ayuda");
 		this.setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

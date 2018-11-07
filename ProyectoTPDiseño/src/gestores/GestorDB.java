@@ -109,9 +109,6 @@ public class GestorDB {
 						lista.add(cAux);
 					}
 				}
-				System.out.println("Lo hizo bien");
-				
-				this.cerrarConexion();
 			}
 			catch(java.sql.SQLException sqle) {
 				System.out.println("Error al seleccionar");
@@ -140,7 +137,6 @@ public class GestorDB {
 					us.setUbicacion(dir);
 				}
 			}
-			System.out.println("Salio bien");
 		}
 		catch(java.sql.SQLException sqle) {
 			System.out.println("Error al seleccionar");
@@ -163,14 +159,79 @@ public class GestorDB {
 					existe = true;
 				}
 			}
-		
-			System.out.println("Salio bien");
 		}
 		catch(java.sql.SQLException sqle) {
 			System.out.println("Error al seleccionar");
 			sqle.printStackTrace();
 		}
 		return existe;
+	}
+	
+	public int devolverSecuencia() {
+		int nroTicket = -1;
+		try{
+			String sql = "SELECT currval('" + '"' + "seqTicket" + '"' + "');";
+			ResultSet resultadoSecuencia;
+			Statement sentencia = this.connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_READ_ONLY);				
+			resultadoSecuencia = sentencia.executeQuery(sql);
+			
+			resultadoSecuencia.next();
+			
+			nroTicket = resultadoSecuencia.getInt(1) + 1;
+		}
+		catch(java.sql.SQLException sqle) {
+			System.out.println("Error al seleccionar");
+			sqle.printStackTrace();
+		}
+		return nroTicket;
+	}
+	
+	public Empleado consultaEmpleado(String legajo) {
+		Empleado emp = new Empleado();
+		try{
+			Direccion dir;
+			String sql = "SELECT E.nroLegajo, E.nombre, E.telefonoDirecto, E.telefonoInterno, E.cargo, D.calle, D.numero, D.piso, D.oficina, D.ciudad, D.provincia FROM EMPLEADO E, DIRECCION D WHERE E.idDireccion = D.idDireccion;";
+			ResultSet resultadoEmpleado;
+			Statement sentencia = this.connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_READ_ONLY);				
+			resultadoEmpleado = sentencia.executeQuery(sql);
+			
+			while(resultadoEmpleado.next()) {
+				dir = new Direccion(resultadoEmpleado.getString(6), resultadoEmpleado.getString(7), resultadoEmpleado.getString(8), resultadoEmpleado.getString(9), resultadoEmpleado.getString(10), resultadoEmpleado.getString(11));
+				emp.setNroLegajo(resultadoEmpleado.getString(1));
+				emp.setNombre(resultadoEmpleado.getString(2));
+				emp.setTelefonoDirecto(resultadoEmpleado.getString(3));
+				emp.setTelefonoInterno(resultadoEmpleado.getString(4));
+				emp.setDescripcionCargo(resultadoEmpleado.getString(5));
+				emp.setUbicacion(dir);
+			}
+		}
+		catch(java.sql.SQLException sqle) {
+			System.out.println("Error al seleccionar");
+			sqle.printStackTrace();
+		}
+		return emp;
+	}
+	
+	public Clasificacion seleccionarClasificaciones(String clas) {
+		Clasificacion clasific = new Clasificacion();
+		try{
+			String sql = "SELECT idClasificacion, nombre, estado, descripcion FROM CLASIFICACION;";
+			ResultSet resultadoClasificacion;
+			Statement sentencia = this.connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_READ_ONLY);				
+			resultadoClasificacion = sentencia.executeQuery(sql);
+			
+			while(resultadoClasificacion.next()) {
+				clasific.setIdClasificacion(resultadoClasificacion.getInt(1));
+				clasific.setNombre(resultadoClasificacion.getString(2));
+				clasific.setEstado(EstadoClasificacion.valueOf(resultadoClasificacion.getString(3)));
+				clasific.setDescripcion(resultadoClasificacion.getString(4));
+			}
+		}
+		catch(java.sql.SQLException sqle) {
+			System.out.println("Error al seleccionar");
+			sqle.printStackTrace();
+		}
+		return clasific;
 	}
 	
 	public void seleccionar() {

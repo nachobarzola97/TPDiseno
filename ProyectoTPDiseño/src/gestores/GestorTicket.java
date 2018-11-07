@@ -4,7 +4,9 @@ import logica.*;
 
 public class GestorTicket {
 	
-	public GestorTicket() {};
+	public GestorTicket() {
+		
+	}
 	
 	public void registrarTicket(DTOTicket dto){
 		Ticket t = new Ticket();

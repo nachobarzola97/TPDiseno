@@ -14,8 +14,4 @@ public class Ticket {
 	List<HistorialEstadoTicket> historialEstadoTicket;
 	Empleado demandante;
 	List<HistorialClasificacion> historialClasificacion;
-	
-	
-	
-
 }
