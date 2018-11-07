@@ -88,7 +88,6 @@ public class RegistroTicketB extends JPanel {
 					}
 				}
 				frame.refreshVentana(grup, clasificacionesTicket, i);
-				
 			}
 		});
 		
@@ -151,7 +150,6 @@ public class RegistroTicketB extends JPanel {
 						grup.addAll(c.getGrupos());
 				}
 				frame.refreshVentana(grup, clas, i);
-				
 			}
 		});
 		this.add(comboBoxGrupo);
