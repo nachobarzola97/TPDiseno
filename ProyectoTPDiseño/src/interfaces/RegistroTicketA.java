@@ -6,6 +6,8 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.DropMode;
+import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -14,15 +16,17 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 
 import java.util.ArrayList;
-import logica.util.DTOTicket;
-import interfaces.RegistroTicketB;
-import javax.swing.DropMode;
-import javax.swing.SwingConstants;
+import java.lang.Exception;
+
+import logica.*;
+import gestores.*;
+import logica.util.*;
+import interfaces.*;
+
 
 
 public class RegistroTicketA extends JPanel {
@@ -36,9 +40,7 @@ public class RegistroTicketA extends JPanel {
 	public RegistroTicketA(JFrame f) {
 		this.frame=f;
 		
-		//TODO: ObtenerTodasLasClasificaciones
 		ArrayList<String> clasificaciones = new ArrayList<String>();
-		//TODO: Borra luego (ModoDePrueba)
 		clasificaciones.add("Default");
 		setLayout(null);
 
@@ -92,16 +94,29 @@ public class RegistroTicketA extends JPanel {
 						    JOptionPane.ERROR_MESSAGE);
 				}
 				else {
-					//TODO: Validar Empleado
-					DTOTicket dtoTicket= new DTOTicket(nroLegajo.getText(), descripcion.getText(),comboBoxClasificaciones.getSelectedItem().toString(),now);
-					//TODO: ParteDeLosGestores
-					JOptionPane.showMessageDialog(frame, "Ticket guardado exitosamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
-					((MenuPrincipalMesa)frame).cambiarVentana(2,dtoTicket);
+					GestorSistemaPersonal gestorPersonal = new GestorSistemaPersonal();
+					boolean e = gestorPersonal.obtenerE(nroLegajo.getText());
+					if(!e) {
+					JOptionPane.showMessageDialog(frame,
+						    "Ingrese un número de legajo válido",
+						    "Error",
+						    JOptionPane.ERROR_MESSAGE);
+					}
+					else {
+					try {
+						DTOTicket dtoTicket= new DTOTicket(nroLegajo.getText(), descripcion.getText(),comboBoxClasificaciones.getSelectedItem().toString(),now);
+						GestorTicket gestorTicket = new GestorTicket();
+						gestorTicket.registrarTicket(dtoTicket);
+						JOptionPane.showMessageDialog(frame, "Ticket guardado exitosamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
+						((MenuPrincipalMesa)frame).cambiarVentana(2,dtoTicket);
 					
-					
+					}catch(Exception E) { JOptionPane.showMessageDialog(frame,
+						    "Hubo un error al guardar el ticket",
+						    "Error",
+						    JOptionPane.ERROR_MESSAGE); }
 				}
 				
-				
+				}
 			}
 		});
 		btnNewButton.setBounds(190, 212, 92, 23);

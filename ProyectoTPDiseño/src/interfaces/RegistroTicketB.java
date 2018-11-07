@@ -34,8 +34,6 @@ public class RegistroTicketB extends JPanel {
 		
 		this.gestorDB = new GestorDB();
 		
-		//TODO: ObtenerGrupoResolucionBD
-		
 		this.gestorDB.connectDatabase();
 		List<Clasificacion> clasificacionesTicket = this.gestorDB.seleccionarClasificaciones();
 		this.gestorDB.cerrarConexion();
