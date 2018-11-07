@@ -20,21 +20,24 @@ import java.util.List;
 
 public class MenuPrincipalMesa extends JFrame {
 
+
+
 	private JPanel contentPane;
 	private RegistroTicketA registroA;
 	private RegistroTicketB registroB;
 	private RegistroTicketB registroBaux;
 	private Menu menu;
-	private CardLayout cardLayout;
+	private CardLayout cardLayout= new CardLayout();
 	private DTOTicket ticketEnProceso;
 	private boolean guiSeleccionada;
+	private Sesion sesion;
 
 
 	/**
 	 * Create the frame.
 	 */
-	public MenuPrincipalMesa() {
-		cardLayout = new CardLayout();
+	public MenuPrincipalMesa(Sesion s) {
+		sesion = s;
 		
 		setTitle("Mesa de ayuda");
 		this.setLocationRelativeTo(null);
@@ -109,6 +112,20 @@ public class MenuPrincipalMesa extends JFrame {
 	public void setTicketEnProceso(DTOTicket ticketEnProceso) {
 		this.ticketEnProceso = ticketEnProceso;
 	}
+
+
+
+	public Sesion getSesion() {
+		return sesion;
+	}
+
+
+
+	public void setSesion(Sesion sesion) {
+		this.sesion = sesion;
+	}
+	
+	
 	
 	
 	

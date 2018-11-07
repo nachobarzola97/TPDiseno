@@ -4,7 +4,7 @@ public class GestorSistemaPersonal {
 	
 	public GestorSistemaPersonal(){};
 	
- public boolean obtenerE(String legajo) {
+ public boolean consultaEmpleado(String legajo) {
 	 GestorDB gestorDB = new GestorDB();
 		
 		gestorDB.connectDatabase();
