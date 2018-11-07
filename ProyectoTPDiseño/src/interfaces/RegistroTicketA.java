@@ -86,14 +86,18 @@ public class RegistroTicketA extends JPanel {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if( nroLegajo.getText().isEmpty() || descripcion.getText().isEmpty() ) {
-					//TODO: Reveer mensaje de error
-					//JOptionPane.showMessageDialog(this,"Los campos no pueden ser nulos.","Error",JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(frame,
+						    "Los campos no pueden ser nulos",
+						    "Error",
+						    JOptionPane.ERROR_MESSAGE);
 				}
 				else {
 					//TODO: Validar Empleado
 					DTOTicket dtoTicket= new DTOTicket(nroLegajo.getText(), descripcion.getText(),comboBoxClasificaciones.getSelectedItem().toString(),now);
-					((MenuPrincipalMesa)frame).cambiarVentana(2,dtoTicket);
 					//TODO: ParteDeLosGestores
+					JOptionPane.showMessageDialog(frame, "Ticket guardado exitosamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
+					((MenuPrincipalMesa)frame).cambiarVentana(2,dtoTicket);
+					
 					
 				}
 				

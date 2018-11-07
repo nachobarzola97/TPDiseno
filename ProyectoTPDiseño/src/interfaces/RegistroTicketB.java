@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
@@ -101,8 +102,10 @@ public class RegistroTicketB extends JPanel {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if( textObservaciones.getText().isEmpty()) {
-					//TODO: Reveer mensaje de errorB
-					//JOptionPane.showMessageDialog(this,"Los campos no pueden ser nulos.","Error",JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(frame,
+						    "Los campos no pueden ser nulos",
+						    "Error",
+						    JOptionPane.ERROR_MESSAGE);
 				}
 				else {
 					int nroTicket = frame.getTicketEnProceso().getNroTicket();
@@ -115,6 +118,7 @@ public class RegistroTicketB extends JPanel {
 						String grupo=comboBoxGrupo.getSelectedItem().toString();
 						//TODO: Derivar-Gestor(grupo,nroTicket)	
 					}
+					JOptionPane.showMessageDialog(frame, "Cambios guardados", "Exito", JOptionPane.INFORMATION_MESSAGE);
 					
 					
 					
