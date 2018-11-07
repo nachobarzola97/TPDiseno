@@ -1,7 +1,6 @@
 package logica;
 
 public class Empleado {
-	
 	String nroLegajo;
 	String nombre;
 	String telefonoInterno;
