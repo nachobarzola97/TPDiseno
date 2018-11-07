@@ -34,16 +34,11 @@ public class RegistroTicketB extends JPanel {
 		
 		this.gestorDB = new GestorDB();
 		
-		//TODO: ObtenerGrupoResolucionBD
-		
 		this.gestorDB.connectDatabase();
 		List<Clasificacion> clasificacionesTicket = this.gestorDB.seleccionarClasificaciones();
 		this.gestorDB.cerrarConexion();
 		
-		String[] estadosTicket= {"Abierto en mesa de ayuda","Abierto derivado a grupo","Solucionado a la espera ok","Cerrado"};
-		
-		
-		
+		String[] estadosTicket = {"Abierto en mesa de ayuda","Abierto derivado a grupo","Solucionado a la espera ok","Cerrado"};
 		
 		JLabel lblObservaciones = new JLabel("Observaciones");
 		lblObservaciones.setBounds(28, 11, 145, 14);
@@ -66,15 +61,30 @@ public class RegistroTicketB extends JPanel {
 		lblNewLabel_2.setBounds(38, 171, 113, 14);
 		this.add(lblNewLabel_2);
 		
-		JComboBox comboBoxEstado = new JComboBox(estadosTicket);
-		comboBoxEstado.setBounds(179, 118, 183, 20);
-		this.add(comboBoxEstado);
-		
 		JComboBoxClasificacion = new JComboBox();
 		for(Clasificacion c : clasificacionesTicket) {
 			JComboBoxClasificacion.addItem(c.getNombre());
 		}
 		JComboBoxClasificacion.setBounds(179, 143, 183, 20);
+		
+		String nombreClas = (String)JComboBoxClasificacion.getSelectedItem();
+		
+		List<GrupoResolucion> grupos = new ArrayList<GrupoResolucion>();
+		
+		for(Clasificacion c : clasificacionesTicket) {
+			if(c.getNombre().equals(nombreClas)) {
+				grupos = c.getGrupos();
+			}
+		}
+		
+		comboBoxGrupo = new JComboBox();
+		for(GrupoResolucion gr : grupos) {
+			comboBoxGrupo.addItem(gr.getNombre());
+		}
+		
+		JComboBox comboBoxEstado = new JComboBox(estadosTicket);
+		comboBoxEstado.setBounds(179, 118, 183, 20);
+		this.add(comboBoxEstado);
 		
 		JComboBoxClasificacion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {

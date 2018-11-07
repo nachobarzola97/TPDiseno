@@ -86,28 +86,28 @@ public class MenuPrincipalMesa extends JFrame {
 				cardLayout.show(contentPane, "2");
 				break;
 		}
-		}
+	}
 		
-		public void refreshVentana(List<GrupoResolucion> grupos, List<Clasificacion> clas, int i) {
-			JComboBox combo = new JComboBox();
-			for (GrupoResolucion g : grupos) {
-				combo.addItem(g);
-			}
-			if(guiSeleccionada) {
-				guiSeleccionada = !guiSeleccionada;
-				registroBaux.setComboBoxGrupo(combo, clas);
-				registroBaux.keepSelectedClass(i);
-				cardLayout.show(contentPane, "3");
-				System.out.println("Llego");
-			}
-			else {
-				guiSeleccionada = !guiSeleccionada;
-				registroB.setComboBoxGrupo(combo, clas);
-				registroB.keepSelectedClass(i);
-				cardLayout.show(contentPane, "2");
-				System.out.println("Llego 2");
-			}
-			};
+	public void refreshVentana(List<GrupoResolucion> grupos, List<Clasificacion> clas, int i) {
+		JComboBox combo = new JComboBox();
+		for (GrupoResolucion g : grupos) {
+			combo.addItem(g);
+		}
+		if(guiSeleccionada) {
+			guiSeleccionada = !guiSeleccionada;
+			registroBaux.setComboBoxGrupo(combo, clas);
+			registroBaux.keepSelectedClass(i);
+			cardLayout.show(contentPane, "3");
+			System.out.println("Llego");
+		}
+		else {
+			guiSeleccionada = !guiSeleccionada;
+			registroB.setComboBoxGrupo(combo, clas);
+			registroB.keepSelectedClass(i);
+			cardLayout.show(contentPane, "2");
+			System.out.println("Llego 2");
+		}
+	}
 		
 	
 	public DTOTicket getTicketEnProceso() {
