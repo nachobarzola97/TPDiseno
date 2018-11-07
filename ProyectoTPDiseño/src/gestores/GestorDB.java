@@ -236,9 +236,11 @@ public class GestorDB {
 	
 	public void guardarTicket(Ticket t) {
 		try{
-			String sql = "";
+			String sql = "INSERT INTO TICKET VALUES (" + t.getNroTicket() + ',' + t.getDescripcion() + ',' + t.getObservaciones() + ',' + t.getFechaApertura() + ',' + "'null'" + ',' + t.getDemandante().getNroLegajo() + ");";  
 			Statement sentencia = this.connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_READ_ONLY);				
 			sentencia.executeQuery(sql);
+			
+			System.out.println("Funciono");
 		}
 		catch(java.sql.SQLException sqle) {
 			System.out.println("Error al seleccionar");
