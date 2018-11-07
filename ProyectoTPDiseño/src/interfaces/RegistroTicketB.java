@@ -124,15 +124,24 @@ public class RegistroTicketB extends JPanel {
 				}
 				else {
 					int nroTicket = frame.getTicketEnProceso().getNroTicket();
-					//TODO: recuperarTicket(nroTicket) 
-					//TODO: setearObservaciones
+					GestorDB gestorDB = new GestorDB();
+					
+					gestorDB.connectDatabase();
+					Ticket t = gestorDB.recuperarTicket(nroTicket);
+					gestorDB.cerrarConexion();
+					
+					GestorTicket gestorTicket = new GestorTicket();
+					gestorTicket.setObservaciones(t, textObservaciones.getText() );
+					
 					if(comboBoxEstado.getSelectedItem()=="Cerrado") {
-						//TODO: Cerrar-Gestorn(nroTicket)
+						gestorTicket.cerrarTicket(t);
 					}
 					else if(comboBoxEstado.getSelectedItem()=="Abierto derivado grupo"){
 						String grupo=comboBoxGrupo.getSelectedItem().toString();
-						//TODO: Derivar-Gestor(grupo,nroTicket)	
+						gestorTicket.derivarTicket(t, grupo);	
 					}
+					
+					
 					JOptionPane.showMessageDialog(frame, "Cambios guardados", "Exito", JOptionPane.INFORMATION_MESSAGE);
 					
 					

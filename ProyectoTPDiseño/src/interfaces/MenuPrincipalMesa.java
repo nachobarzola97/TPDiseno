@@ -30,12 +30,15 @@ public class MenuPrincipalMesa extends JFrame {
 	private CardLayout cardLayout= new CardLayout();
 	private DTOTicket ticketEnProceso;
 	private boolean guiSeleccionada;
+	private Sesion sesion;
 
 
 	/**
 	 * Create the frame.
 	 */
-	public MenuPrincipalMesa() {
+	public MenuPrincipalMesa(Sesion s) {
+		sesion = s;
+		
 		setTitle("Mesa de ayuda");
 		this.setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -109,6 +112,20 @@ public class MenuPrincipalMesa extends JFrame {
 	public void setTicketEnProceso(DTOTicket ticketEnProceso) {
 		this.ticketEnProceso = ticketEnProceso;
 	}
+
+
+
+	public Sesion getSesion() {
+		return sesion;
+	}
+
+
+
+	public void setSesion(Sesion sesion) {
+		this.sesion = sesion;
+	}
+	
+	
 	
 	
 	

@@ -4,11 +4,11 @@ public class GestorSistemaPersonal {
 	
 	public GestorSistemaPersonal(){};
 	
- public boolean obtenerE(String legajo) {
+ public boolean consultaEmpleado(String legajo) {
 	 GestorDB gestorDB = new GestorDB();
 		
 		gestorDB.connectDatabase();
-		boolean existe = gestorDB.existeEmpleado(legajo);
+		boolean existe = gestorDB.consultaEmpleado(legajo);
 		gestorDB.cerrarConexion();
 		
 		return true;

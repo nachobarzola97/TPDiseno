@@ -18,6 +18,7 @@ import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
 import gestores.GestorDB;
+import gestores.GestorUsuario;
 
 import javax.swing.SwingConstants;
 import javax.swing.JSeparator;
@@ -123,15 +124,17 @@ public class Login extends JFrame {
 		JButton btnIniciarSeccin = new JButton("Iniciar sesi\u00F3n");
 		btnIniciarSeccin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				/*GestorDB gestorDB = new GestorDB();
+				GestorDB gestorDB = new GestorDB();
 				
 				gestorDB.connectDatabase();
 				Usuario usr = gestorDB.seleccionarUsuario(textPane.getText());
 				gestorDB.cerrarConexion();
 				
 				
-				Sesion sesion = new Sesion(usr);*/
-				MenuPrincipalMesa menu = new MenuPrincipalMesa();
+				GestorUsuario gestorUsuario = new GestorUsuario();
+				Sesion s= gestorUsuario.setUsuarioLogueado(usr);
+				
+				MenuPrincipalMesa menu = new MenuPrincipalMesa(s);
 				menu.setVisible(true);
 				
 				
