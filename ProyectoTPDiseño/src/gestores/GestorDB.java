@@ -151,8 +151,26 @@ public class GestorDB {
 	}
 	
 	public boolean existeEmpleado(String legajo) {
+		boolean existe = false;
+		try{
+			String sql = "SELECT nroLegajo FROM EMPLEADO;";
+			ResultSet resultadoEmpleado;
+			Statement sentencia = this.connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_READ_ONLY);				
+			resultadoEmpleado = sentencia.executeQuery(sql);
+			
+			while(resultadoEmpleado.next()) {
+				if(legajo.equals(resultadoEmpleado.getString(1))) {
+					existe = true;
+				}
+			}
 		
-		return true;
+			System.out.println("Salio bien");
+		}
+		catch(java.sql.SQLException sqle) {
+			System.out.println("Error al seleccionar");
+			sqle.printStackTrace();
+		}
+		return existe;
 	}
 	
 	public void seleccionar() {
