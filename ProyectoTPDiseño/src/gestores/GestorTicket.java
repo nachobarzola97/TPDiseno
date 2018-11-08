@@ -34,6 +34,7 @@ public class GestorTicket {
 		t.setHistorialEstadoTicket(e);
 		t.setHistorialClasificacion(c);
 		t.setDemandante(demand);
+		t.setTiempoEnMesa(0);
 		
 		HistorialEstadoTicket ht = new HistorialEstadoTicket();
 		ht.setFechaInicio(dto.getFechaApertura());

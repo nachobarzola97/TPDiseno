@@ -33,6 +33,7 @@ import java.awt.SystemColor;
 public class Login extends JFrame {
 	private JPanel contentPane;
 	private JPasswordField passwordField;
+	private JFrame frame=this;
 	
 
 	/**
@@ -136,6 +137,7 @@ public class Login extends JFrame {
 				
 				MenuPrincipalMesa menu = new MenuPrincipalMesa(s);
 				menu.setVisible(true);
+				frame.dispose();
 				
 				
 				
