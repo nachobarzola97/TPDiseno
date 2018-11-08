@@ -13,9 +13,14 @@ public class Intervencion {
 	String Observaciones;
 	Usuario actor;
 	
+<<<<<<< HEAD
 	public Intervencion() {
 		
 	}
+=======
+	public Intervencion() {};
+	
+>>>>>>> Tami
 	
 	public Intervencion(Ticket ticket, LocalDateTime fechaAsignacion, LocalDateTime fechaInicioTrabajo,
 			LocalDateTime fechaFinal, long tiempoTrabajado, EstadoIntervencion estado, String observaciones) {
@@ -28,6 +33,8 @@ public class Intervencion {
 		this.estado = estado;
 		Observaciones = observaciones;
 	}
+
+
 
 
 
