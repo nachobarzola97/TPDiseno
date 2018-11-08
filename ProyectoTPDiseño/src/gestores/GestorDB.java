@@ -291,63 +291,49 @@ public class GestorDB {
 	}
 	
 	public Ticket recuperarTicket(int nroTicket) {
+		Ticket t = new Ticket();
 		try{
-			String sql = "SELECT * FROM Ticket;";
-			ResultSet resultado;
+			String sql = "SELECT observaciones, fechaApertura, horaApertura FROM Ticket WHERE nroTicket = 1;";
+			ResultSet resultadoTicket; 
 			Statement sentencia = this.connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_READ_ONLY);				
-			resultado = sentencia.executeQuery(sql);
+			resultadoTicket = sentencia.executeQuery(sql);
 			
-			while(resultado.next()) {
-				System.out.println("Dato: "+resultado.getString(1));
-			}
+			resultadoTicket.next();
+			t.setNroTicket(nroTicket);
+			t.setObservaciones(resultadoTicket.getString(1));
 		}
 		catch(java.sql.SQLException sqle) {
 			System.out.println("Error al seleccionar");
 			sqle.printStackTrace();
 		}
-		return null;
+		return t;
 	}
 	
 	public GrupoResolucion recuperarGrupo(String groupName) {
-		
-		return null;
-	}
-	
-	public void seleccionar() {
+		GrupoResolucion gr = new GrupoResolucion();
 		try{
-			String sql = "SELECT nroTicket FROM Ticket;";
-			ResultSet resultado;
-			ResultSetMetaData res;
-			Statement sentencia = this.connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_READ_ONLY);				
-			resultado = sentencia.executeQuery(sql);
-			res = resultado.getMetaData();
+			String sql = "SELECT idGrupo, estado, descripcion FROM GRUPORESOLUCION WHERE nombre = '" + groupName + "';";
+			ResultSet resultadoGrupo; 
+			Statement sentencia = this.connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_READ_ONLY);
+			resultadoGrupo = sentencia.executeQuery(sql);
 			
-			while(resultado.next()) {
-				System.out.println("Dato: "+resultado.getString(1));
-			}
+			resultadoGrupo.next();
 			
-		
-			System.out.println("Salio bien");
+			gr.setNombre(groupName);
+			gr.setCodigo(resultadoGrupo.getInt(1));
+			gr.setEstado(EstadoGrupoResolucion.valueOf(resultadoGrupo.getString(2)));
+			gr.setDescripcion(resultadoGrupo.getString(3));
+			System.out.println("IdGrupo: "+gr.getCodigo());
+			System.out.println("Nombre: "+gr.getNombre());
+			System.out.println("Estado: "+gr.getEstado().toString());
+			System.out.println("Descripcion: "+gr.getDescripcion());
 		}
 		catch(java.sql.SQLException sqle) {
 			System.out.println("Error al seleccionar");
 			sqle.printStackTrace();
 		}
-		
+		return gr;
 	}
 	
-	public void insertar() {
-		try {
-			PreparedStatement sent = this.connection.prepareStatement("INSERT INTO TICKET VALUES (1, 'Ticket1', 'ObsTicket1', '2018-10-30', null, 24088);");
-			sent.execute();
-			sent.close();
-			
-			System.out.println("Salio bien");
-		}
-		catch(java.sql.SQLException sqle) {
-			System.out.println("Error al insertar");
-			sqle.printStackTrace();
-		}
-	}
 }
 
