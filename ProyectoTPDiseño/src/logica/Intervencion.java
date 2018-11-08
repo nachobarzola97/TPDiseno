@@ -13,7 +13,7 @@ public class Intervencion {
 	String Observaciones;
 	Usuario actor;
 	
-	public void Intervencion() {};
+	public Intervencion() {};
 	
 	
 
@@ -28,6 +28,8 @@ public class Intervencion {
 		this.estado = estado;
 		Observaciones = observaciones;
 	}
+
+
 
 
 
