@@ -25,7 +25,6 @@ public class MenuPrincipalMesa extends JFrame {
 	private JPanel contentPane;
 	private RegistroTicketA registroA;
 	private RegistroTicketB registroB;
-	private RegistroTicketB registroBaux;
 	private Menu menu;
 	private CardLayout cardLayout= new CardLayout();
 	private DTOTicket ticketEnProceso;
@@ -50,19 +49,13 @@ public class MenuPrincipalMesa extends JFrame {
 		
 		registroA = new RegistroTicketA(this);
 		registroB = new RegistroTicketB(this);
-		registroBaux = new RegistroTicketB(this);
 		menu = new Menu(this); 
 		
 		contentPane.add(menu, "3");
 		contentPane.add(registroA,"1");
 		contentPane.add(registroB,"2");
-		contentPane.add(registroBaux,"4");
-		guiSeleccionada = true;
 		System.out.println();
-		
 	}
-		
-		
 	
 	public void cambiarVentana(int n,DTOTicket dtoTicket) {
 		this.ticketEnProceso=dtoTicket;
@@ -85,28 +78,6 @@ public class MenuPrincipalMesa extends JFrame {
 			cardLayout.show(contentPane, "3");
 		}
 	}
-		
-	public void refreshVentana(List<GrupoResolucion> grupos, List<Clasificacion> clas, int i) {
-		JComboBox combo = new JComboBox();
-		for (GrupoResolucion g : grupos) {
-			combo.addItem(g);
-		}
-		if(guiSeleccionada) {
-			guiSeleccionada = !guiSeleccionada;
-			registroBaux.setComboBoxGrupo(combo, clas);
-			registroBaux.keepSelectedClass(i);
-			cardLayout.show(contentPane, "4");
-			System.out.println("Llego");
-		}
-		else {
-			guiSeleccionada = !guiSeleccionada;
-			registroB.setComboBoxGrupo(combo, clas);
-			registroB.keepSelectedClass(i);
-			cardLayout.show(contentPane, "2");
-			System.out.println("Llego 2");
-		}
-	}
-		
 	
 	public DTOTicket getTicketEnProceso() {
 		return ticketEnProceso;
@@ -116,20 +87,12 @@ public class MenuPrincipalMesa extends JFrame {
 		this.ticketEnProceso = ticketEnProceso;
 	}
 
-
-
 	public Sesion getSesion() {
 		return sesion;
 	}
 
-
-
 	public void setSesion(Sesion sesion) {
 		this.sesion = sesion;
 	}
-	
-	
-	
-	
 	
 }
