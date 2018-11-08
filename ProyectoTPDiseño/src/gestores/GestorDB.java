@@ -173,7 +173,7 @@ public class GestorDB {
 	public int devolverSecuencia() {
 		int nroTicket = -1;
 		try{
-			String sql = "SELECT currval('" + '"' + "seqTicket" + '"' + "');";
+			String sql = "SELECT currval('" + '"' + "seqticket" + '"' + "');";
 			ResultSet resultadoSecuencia;
 			Statement sentencia = this.connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_READ_ONLY);				
 			resultadoSecuencia = sentencia.executeQuery(sql);
