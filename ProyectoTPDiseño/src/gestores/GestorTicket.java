@@ -11,7 +11,7 @@ public class GestorTicket {
 	public GestorTicket() {};
 	
 	public void registrarTicket(DTOTicket dto, Sesion s){
-		Ticket t = new Ticket();
+		
 		List<Intervencion> l = new ArrayList<Intervencion>();
 		List<HistorialEstadoTicket> e = new ArrayList<HistorialEstadoTicket>();
 		List<HistorialClasificacion> c = new ArrayList<HistorialClasificacion>();
@@ -20,9 +20,9 @@ public class GestorTicket {
 		gestorDB.connectDatabase();
 		int secuencia = gestorDB.devolverSecuencia();
 		Empleado demand = gestorDB.consultaEmpleado(dto.getNroLegajo()); 
-		Clasificacion clas = gestorDB.seleccionarClasificaciones(dto.getClasificacion());
-		gestorDB.cerrarConexion();
 		
+		gestorDB.cerrarConexion();
+		Ticket t = new Ticket();
 		GestorUsuario gestorUsuario = new GestorUsuario();
 		Usuario usr = gestorUsuario.getUser(s);
 		
@@ -39,6 +39,9 @@ public class GestorTicket {
 		ht.setFechaInicio(dto.getFechaApertura());
 		ht.setEstado(EstadoTicket.abiertoEnMesa);
 		ht.setActor(usr);
+		
+		GestorClasificacion gestorClasificacion = new GestorClasificacion();
+		Clasificacion clas = gestorClasificacion.seleccionarClasificaciones(dto.getClasificacion());
 		
 		HistorialClasificacion hc = new HistorialClasificacion();
 		hc.setClasificacion(clas);
