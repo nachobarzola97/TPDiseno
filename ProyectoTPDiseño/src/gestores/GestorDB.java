@@ -4,6 +4,8 @@ import java.sql.*;
 import logica.*;
 import logica.util.*;
 
+import java.time.LocalDateTime;
+
 import java.util.List;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
@@ -290,6 +292,7 @@ public class GestorDB {
 		}
 	}
 	
+<<<<<<< HEAD
 	public Ticket recuperarTicket(int nroTicket) {
 		Ticket t = new Ticket();
 		try{
@@ -335,5 +338,19 @@ public class GestorDB {
 		return gr;
 	}
 	
+=======
+	public LocalDateTime castearFechaYHora(String fecha, String hora ) {
+		int a, me, d, h, mi, s;
+		a = Integer.parseInt(fecha.substring(0, 4));
+		me = Integer.parseInt(fecha.substring(5, 7));
+		d = Integer.parseInt(fecha.substring(8));
+		h = Integer.parseInt(hora.substring(0, 2));
+		mi = Integer.parseInt(hora.substring(3, 5));
+		s= Integer.parseInt(hora.substring(6));
+		
+		LocalDateTime fechaYHora = LocalDateTime.of(a, me, d, h, mi, s);
+		return fechaYHora;
+	}
+>>>>>>> Tami
 }
 
