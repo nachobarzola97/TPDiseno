@@ -20,7 +20,7 @@ public class GestorTicket {
 		
 		gestorDB.connectDatabase();
 		int secuencia = gestorDB.devolverSecuencia();
-		Empleado demand = gestorDB.consultaEmpleado(dto.getNroLegajo()); 
+		Empleado demand = gestorDB.consultaEmpleado(dto.getNroLegajo());
 		
 		gestorDB.cerrarConexion();
 		Ticket t = new Ticket();

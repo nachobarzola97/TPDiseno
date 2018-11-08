@@ -247,7 +247,7 @@ public class GestorDB {
 			String fecha = "'" + t.getFechaApertura().getYear() + '-' + t.getFechaApertura().getMonthValue() + '-' + t.getFechaApertura().getDayOfMonth() + "'";
 			String desc = "'" + t.getDescripcion() + "'";
 			String obs = "'" + t.getDescripcion() + "'";
-			String nroL = "'" + t.getDemandante().getNroLegajo() + "'";
+			String nroL = "'" + t.getDemandante().getNroLegajo() + "'";  //TODO: falta una condicion en el where de la consulta existe empleado
 			
 			String sql = "INSERT INTO TICKET VALUES (" + t.getNroTicket() + ',' + desc + ',' + obs + ',' + fecha + ',' + hora + ", 0," + nroL + ");";
 			insercion = this.connection.prepareStatement(sql);

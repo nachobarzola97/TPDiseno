@@ -82,7 +82,6 @@ public class RegistroTicketB extends JPanel {
 		
 		for(GrupoResolucion gr : grupos) {
 			comboBoxGrupo.addItem(gr.getNombre());
-			System.out.println("Grupo "+gr.getNombre());
 		}
 		
 		comboBoxGrupo.setBounds(179, 168, 183, 20);
