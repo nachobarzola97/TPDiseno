@@ -2,8 +2,7 @@ package gestores;
 
 import java.sql.*;
 import logica.*;
-import logica.util.EstadoClasificacion;
-import logica.util.EstadoGrupoResolucion;
+import logica.util.*;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -238,6 +237,10 @@ public class GestorDB {
 	
 	public void guardarTicket(Ticket t) {
 		try{
+			Statement sentencia = this.connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_READ_ONLY);
+			PreparedStatement insercion;
+			ResultSet resultadoEstado;
+			ResultSet resultadoClasificacion;
 			String hora = "'" + t.getFechaApertura().getHour() + ':' + t.getFechaApertura().getMinute() + ':' + t.getFechaApertura().getSecond() + "'";
 			String fecha = "'" + t.getFechaApertura().getYear() + '-' + t.getFechaApertura().getMonthValue() + '-' + t.getFechaApertura().getDayOfMonth() + "'";
 			String desc = "'" + t.getDescripcion() + "'";
@@ -245,23 +248,68 @@ public class GestorDB {
 			String nroL = "'" + t.getDemandante().getNroLegajo() + "'";
 			
 			String sql = "INSERT INTO TICKET VALUES (" + t.getNroTicket() + ',' + desc + ',' + obs + ',' + fecha + ',' + hora + ", 0," + nroL + ");";
-			System.out.println("Consulta: "+sql);
-			Statement sentencia = this.connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_READ_ONLY);				
-			sentencia.executeQuery(sql);
+			insercion = this.connection.prepareStatement(sql);
+			insercion.executeUpdate();
 			
-			System.out.println("Funciono");
+			HistorialEstadoTicket het = t.getHistorialEstadoTicket().get(t.getHistorialEstadoTicket().size() - 1);
+			String estT = "'" + het.getEstado().toString() + "'";
+			String sql2 = "SELECT idEstado FROM ESTADO WHERE nombre = " + estT + ";"; 
+			resultadoEstado = sentencia.executeQuery(sql2);
+			
+			resultadoEstado.next();
+			int idEstado = resultadoEstado.getInt(1);
+			String userName = "'" + het.getActor().getNombreUsuario() + "'";
+			String nextValor = "('" + '"' + "idasignado" + '"' + "')";	//('"idasignado"')
+			hora = "'" + het.getFechaInicio().getHour() + ':' + het.getFechaInicio().getMinute() + ':' +het.getFechaInicio().getSecond() + "'";
+			fecha = "'" + het.getFechaInicio().getYear() + '-' + het.getFechaInicio().getMonthValue() + '-' + het.getFechaInicio().getDayOfMonth() + "'";
+			
+			
+			String sql3 = "INSERT INTO TicketEstaEnEstado VALUES (nextval" + nextValor + ',' + fecha + ',' + hora + ", null, null, " + idEstado + ',' + t.getNroTicket() + ',' + userName + ");";
+			insercion = this.connection.prepareStatement(sql3);
+			insercion.executeUpdate();
+			
+			HistorialClasificacion hec = t.getHistorialClasificacion().get(t.getHistorialClasificacion().size() - 1);
+			String clasT = "'" + hec.getClasificacion().getNombre() + "'";
+			String sql4 = "SELECT idClasificacion FROM CLASIFICACION WHERE nombre = " + clasT + ';';
+			resultadoClasificacion = sentencia.executeQuery(sql4);
+			
+			resultadoClasificacion.next();
+			int idClasificacion = resultadoClasificacion.getInt(1);
+			userName = "'" + hec.getActor().getNombreUsuario() + "'";
+			hora = "'" + hec.getFechaInicio().getHour() + ':' + hec.getFechaInicio().getMinute() + ':' + hec.getFechaInicio().getSecond() + "'";
+			fecha = "'" + hec.getFechaInicio().getYear() + '-' + hec.getFechaInicio().getMonthValue() + '-' + hec.getFechaInicio().getDayOfMonth() + "'";
+			nextValor = "('" + '"' + "idclasificado" + '"' + "')";	//('"idclasificado"')
+			
+			String sql5 = "INSERT INTO ClasificacionPerteneceATicket VALUES (nextval" + nextValor + ',' + fecha + ',' + hora + ", null, null, " + idClasificacion + ',' + t.getNroTicket() + ',' + userName + ");";
+			insercion = this.connection.prepareStatement(sql5);
+			insercion.executeUpdate();
 		}
 		catch(java.sql.SQLException sqle) {
-			System.out.println("Error al seleccionar");
+			System.out.println("Error al guardar");
 			sqle.printStackTrace();
 		}
 	}
 	
 	public Ticket recuperarTicket(int nroTicket) {
+		try{
+			String sql = "SELECT * FROM Ticket;";
+			ResultSet resultado;
+			Statement sentencia = this.connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_READ_ONLY);				
+			resultado = sentencia.executeQuery(sql);
+			
+			while(resultado.next()) {
+				System.out.println("Dato: "+resultado.getString(1));
+			}
+		}
+		catch(java.sql.SQLException sqle) {
+			System.out.println("Error al seleccionar");
+			sqle.printStackTrace();
+		}
 		return null;
 	}
 	
 	public GrupoResolucion recuperarGrupo(String groupName) {
+		
 		return null;
 	}
 	

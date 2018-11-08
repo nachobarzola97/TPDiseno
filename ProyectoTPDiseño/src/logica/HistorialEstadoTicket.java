@@ -10,7 +10,18 @@ public class HistorialEstadoTicket {
 	Ticket ticket;
 	Usuario actor;
 	
-	public void HistorialEstadoTicket() {}
+	public HistorialEstadoTicket() {
+		
+	}
+
+	public HistorialEstadoTicket(LocalDateTime fechaInicio, EstadoTicket estado, Usuario actor) {
+		super();
+		this.fechaInicio = fechaInicio;
+		this.estado = estado;
+		this.actor = actor;
+	}
+
+
 
 	public LocalDateTime getFechaInicio() {
 		return fechaInicio;

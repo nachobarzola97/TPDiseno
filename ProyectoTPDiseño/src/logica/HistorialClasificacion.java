@@ -8,7 +8,18 @@ public class HistorialClasificacion {
 	Clasificacion clasificacion;
 	Usuario actor;
 	
-	public void HistorialClasificacion() {}
+	public HistorialClasificacion() {
+		
+	}
+
+	public HistorialClasificacion(LocalDateTime fechaInicio, Clasificacion clasificacion, Usuario actor) {
+		super();
+		this.fechaInicio = fechaInicio;
+		this.clasificacion = clasificacion;
+		this.actor = actor;
+	}
+
+
 
 	public LocalDateTime getFechaInicio() {
 		return fechaInicio;

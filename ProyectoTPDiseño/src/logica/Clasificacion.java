@@ -16,6 +16,11 @@ public class Clasificacion {
 		this.grupos = new ArrayList<GrupoResolucion>();
 	}
 	
+	public Clasificacion(int idClasificacion, String nombre) {
+		this.idClasificacion = idClasificacion;
+		this.nombre = nombre;
+	}
+	
 	public Clasificacion(int idClasificacion, String nombre, String descripcion, EstadoClasificacion estado, List<GrupoResolucion> grupos) {
 		this.idClasificacion = idClasificacion;
 		this.nombre = nombre;

@@ -38,7 +38,7 @@ public class GestorTicket {
 		
 		HistorialEstadoTicket ht = new HistorialEstadoTicket();
 		ht.setFechaInicio(dto.getFechaApertura());
-		ht.setEstado(EstadoTicket.abiertoEnMesa);
+		ht.setEstado(EstadoTicket.AbiertoEnMesaDeAyuda);
 		ht.setActor(usr);
 		
 		HistorialClasificacion hc = new HistorialClasificacion();
@@ -76,7 +76,7 @@ public class GestorTicket {
 				
 				
 		ht.setActor(usr);
-		ht.setEstado(EstadoTicket.cerrado);
+		ht.setEstado(EstadoTicket.Cerrado);
 		ht.setFechaInicio(now);
 		t.agregarHistorialTicket(ht);
 	
@@ -103,7 +103,7 @@ public class GestorTicket {
 				
 				
 		ht.setActor(usr);
-		ht.setEstado(EstadoTicket.abiertoDerivado);
+		ht.setEstado(EstadoTicket.AbiertoDerivadoAGrupo);
 		ht.setFechaInicio(now);
 		t.agregarHistorialTicket(ht);
 		
