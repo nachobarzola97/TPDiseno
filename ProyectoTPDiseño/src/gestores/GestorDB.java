@@ -292,7 +292,6 @@ public class GestorDB {
 		}
 	}
 	
-<<<<<<< HEAD
 	public Ticket recuperarTicket(int nroTicket) {
 		Ticket t = new Ticket();
 		try{
@@ -304,6 +303,7 @@ public class GestorDB {
 			resultadoTicket.next();
 			t.setNroTicket(nroTicket);
 			t.setObservaciones(resultadoTicket.getString(1));
+			t.setFechaApertura(this.castearFechaYHora(resultadoTicket.getString(2), resultadoTicket.getString(3)));
 		}
 		catch(java.sql.SQLException sqle) {
 			System.out.println("Error al seleccionar");
@@ -326,10 +326,6 @@ public class GestorDB {
 			gr.setCodigo(resultadoGrupo.getInt(1));
 			gr.setEstado(EstadoGrupoResolucion.valueOf(resultadoGrupo.getString(2)));
 			gr.setDescripcion(resultadoGrupo.getString(3));
-			System.out.println("IdGrupo: "+gr.getCodigo());
-			System.out.println("Nombre: "+gr.getNombre());
-			System.out.println("Estado: "+gr.getEstado().toString());
-			System.out.println("Descripcion: "+gr.getDescripcion());
 		}
 		catch(java.sql.SQLException sqle) {
 			System.out.println("Error al seleccionar");
@@ -338,7 +334,6 @@ public class GestorDB {
 		return gr;
 	}
 	
-=======
 	public LocalDateTime castearFechaYHora(String fecha, String hora ) {
 		int a, me, d, h, mi, s;
 		a = Integer.parseInt(fecha.substring(0, 4));
@@ -351,6 +346,5 @@ public class GestorDB {
 		LocalDateTime fechaYHora = LocalDateTime.of(a, me, d, h, mi, s);
 		return fechaYHora;
 	}
->>>>>>> Tami
 }
 
