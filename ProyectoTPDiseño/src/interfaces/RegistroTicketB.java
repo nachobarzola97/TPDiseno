@@ -56,10 +56,12 @@ public class RegistroTicketB extends JPanel {
 		
 		JLabel lblNewLabel_1 = new JLabel("Clasificaci\u00F3n");
 		lblNewLabel_1.setBounds(38, 146, 113, 14);
+		lblNewLabel_1.setVisible(false);
 		this.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Grupo resoluci\u00F3n");
 		lblNewLabel_2.setBounds(38, 171, 113, 14);
+		lblNewLabel_2.setVisible(false);
 		this.add(lblNewLabel_2);
 		
 		JComboBoxClasificacion = new JComboBox<String>();
@@ -67,6 +69,7 @@ public class RegistroTicketB extends JPanel {
 			JComboBoxClasificacion.addItem(c.getNombre());
 		}
 		JComboBoxClasificacion.setBounds(179, 143, 183, 20);
+		JComboBoxClasificacion.setVisible(false);
 		
 		String nombreClas = (String)JComboBoxClasificacion.getSelectedItem();
 		
@@ -85,7 +88,7 @@ public class RegistroTicketB extends JPanel {
 		}
 		
 		comboBoxGrupo.setBounds(179, 168, 183, 20);
-		
+		comboBoxGrupo.setVisible(false);
 		this.add(comboBoxGrupo);
 		
 		JComboBox comboBoxEstado = new JComboBox(estadosTicket);
