@@ -13,7 +13,9 @@ public class Usuario extends Empleado {
 		this.grupo = grupo;
 	}
 	
-	public Usuario() {};
+	public Usuario() {
+		
+	}
 
 	public String getNombreUsuario() {
 		return nombreUsuario;

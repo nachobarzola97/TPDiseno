@@ -104,8 +104,8 @@ public class RegistroTicketA extends JPanel {
 					}
 					else {
 					try {
-						DTOTicket dtoTicket= new DTOTicket(nroLegajo.getText(), descripcion.getText(),comboBoxClasificaciones.getSelectedItem().toString(),now);
 						GestorTicket gestorTicket = new GestorTicket();
+						DTOTicket dtoTicket= new DTOTicket(nroLegajo.getText(), descripcion.getText(),comboBoxClasificaciones.getSelectedItem().toString(),now);
 						gestorTicket.registrarTicket(dtoTicket, ((MenuPrincipalMesa)frame).getSesion());
 						JOptionPane.showMessageDialog(frame, "Ticket guardado exitosamente", "Exito", JOptionPane.INFORMATION_MESSAGE);
 						((MenuPrincipalMesa)frame).cambiarVentana(2,dtoTicket);

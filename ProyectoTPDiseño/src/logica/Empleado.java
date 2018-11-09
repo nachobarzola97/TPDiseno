@@ -23,12 +23,6 @@ public class Empleado {
 		
 	}
 
-	public Empleado(String nroLegajo, String nombre) {
-		super();
-		this.nroLegajo = nroLegajo;
-		this.nombre = nombre;
-	}
-
 	public String getNroLegajo() {
 		return nroLegajo;
 	}

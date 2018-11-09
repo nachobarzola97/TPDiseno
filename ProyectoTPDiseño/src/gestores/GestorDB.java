@@ -295,15 +295,30 @@ public class GestorDB {
 	public Ticket recuperarTicket(int nroTicket) {
 		Ticket t = new Ticket();
 		try{
-			String sql = "SELECT observaciones, fechaApertura, horaApertura FROM Ticket WHERE nroTicket = " + nroTicket + ';';
+			Empleado emp;
+			Usuario user;
+			Direccion dir;
+			GrupoResolucion gr;
+			HistorialEstadoTicket het;
+			HistorialClasificacion hc;
+			String sql = "SELECT T.descripcion, T.observaciones, T.fechaApertura, T.horaApertura, T.tiempoEnMesa, E.nroLegajo, E.nombre, E.telefonoDirecto, E.telefonoInterno, E.cargo, D.calle, D.numero, D.piso, D.oficina, D.ciudad, D.provincia, U.nombreUsuario, U.password, G.idGrupo, G.nombre, G.estado, G.descripcion FROM TICKET T, EMPLEADO E, DIRECCION D, USUARIO U, GRUPORESOLUCION G, UsuarioCreaTicket UCT WHERE T.nroLegajo = E.nroLegajo AND E.idDireccion = D.idDireccion AND T.nroTicket = UCT.nroTicket AND UCT.nombreUsuario = U.nombreUsuario AND U.idGrupo = G.idGrupo AND T.nroTicket = " + nroTicket + ';';
 			ResultSet resultadoTicket; 
 			Statement sentencia = this.connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_READ_ONLY);				
 			resultadoTicket = sentencia.executeQuery(sql);
 			
 			resultadoTicket.next();
 			t.setNroTicket(nroTicket);
-			t.setObservaciones(resultadoTicket.getString(1));
-			t.setFechaApertura(this.castearFechaYHora(resultadoTicket.getString(2), resultadoTicket.getString(3)));
+			t.setDescripcion(resultadoTicket.getString(1));
+			t.setObservaciones(resultadoTicket.getString(2));
+			t.setFechaApertura(this.castearFechaYHora(resultadoTicket.getString(3), resultadoTicket.getString(4)));
+			t.setTiempoEnMesa(resultadoTicket.getInt(5));
+			dir = new Direccion(resultadoTicket.getString(11), resultadoTicket.getString(12), resultadoTicket.getString(13), resultadoTicket.getString(14), resultadoTicket.getString(15), resultadoTicket.getString(16));
+			emp = new Empleado(resultadoTicket.getString(6), resultadoTicket.getString(7), resultadoTicket.getString(8), resultadoTicket.getString(9), resultadoTicket.getString(10), dir);
+			t.setDemandante(emp);
+			
+			gr = new GrupoResolucion(resultadoTicket.getInt(19), resultadoTicket.getString(20), EstadoGrupoResolucion.valueOf(resultadoTicket.getString(21)), resultadoTicket.getString(22));
+			user = new Usuario(resultadoTicket.getString(17), resultadoTicket.getString(18), gr);
+			t.setActorMesa(user);
 		}
 		catch(java.sql.SQLException sqle) {
 			System.out.println("Error al seleccionar");

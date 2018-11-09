@@ -31,7 +31,7 @@ public class Ticket {
 
 	public Ticket() {
 		
-	};
+	}
 	
 	public int getNroTicket() {
 		return nroTicket;
