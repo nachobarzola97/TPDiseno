@@ -173,7 +173,7 @@ public class GestorDB {
 			
 			resultadoSecuencia.next();
 			
-			nroTicket = resultadoSecuencia.getInt(1) + 1;
+			nroTicket = resultadoSecuencia.getInt(1);
 		}
 		catch(java.sql.SQLException sqle) {
 			System.out.println("Error al seleccionar");

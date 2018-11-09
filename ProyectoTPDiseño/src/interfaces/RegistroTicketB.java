@@ -20,6 +20,7 @@ import java.awt.event.ActionEvent;
 
 import gestores.*;
 import logica.*;
+import logica.util.EstadoTicket;
 
 
 public class RegistroTicketB extends JPanel {
@@ -89,11 +90,6 @@ public class RegistroTicketB extends JPanel {
 		
 		JComboBox comboBoxEstado = new JComboBox(estadosTicket);
 		comboBoxEstado.setBounds(179, 118, 183, 20);
-		comboBoxEstado.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-			}
-		});
 		this.add(comboBoxEstado);
 		
 		JComboBoxClasificacion.addActionListener(new ActionListener() {
@@ -117,6 +113,23 @@ public class RegistroTicketB extends JPanel {
 		});
 		
 		this.add(JComboBoxClasificacion);
+		
+		comboBoxEstado.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(EstadoTicket.AbiertoDerivadoAGrupo.toString().equals((String)comboBoxEstado.getSelectedItem())) {
+					comboBoxGrupo.setVisible(true);
+					JComboBoxClasificacion.setVisible(true);
+					lblNewLabel_1.setVisible(true);
+					lblNewLabel_2.setVisible(true);
+				}
+				else {
+					comboBoxGrupo.setVisible(false);
+					JComboBoxClasificacion.setVisible(false);
+					lblNewLabel_1.setVisible(false);
+					lblNewLabel_2.setVisible(false);
+				}
+			}
+		});
 		
 		JButton btnNewButton = new JButton("Cancelar");
 		btnNewButton.addActionListener(new ActionListener() {
