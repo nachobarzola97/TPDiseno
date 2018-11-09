@@ -237,54 +237,114 @@ public class GestorDB {
 		return clasific;
 	}
 	
-	public void guardarTicket(Ticket t) {
+	public void guardarTicket(Ticket t, boolean update) {
 		try{
-			Statement sentencia = this.connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_READ_ONLY);
-			PreparedStatement insercion;
-			ResultSet resultadoEstado;
-			ResultSet resultadoClasificacion;
-			String hora = "'" + t.getFechaApertura().getHour() + ':' + t.getFechaApertura().getMinute() + ':' + t.getFechaApertura().getSecond() + "'";
-			String fecha = "'" + t.getFechaApertura().getYear() + '-' + t.getFechaApertura().getMonthValue() + '-' + t.getFechaApertura().getDayOfMonth() + "'";
-			String desc = "'" + t.getDescripcion() + "'";
-			String obs = "'" + t.getDescripcion() + "'";
-			String nroL = "'" + t.getDemandante().getNroLegajo() + "'";
-			
-			String sql = "INSERT INTO TICKET VALUES (" + t.getNroTicket() + ',' + desc + ',' + obs + ',' + fecha + ',' + hora + ", 0," + nroL + ");";
-			insercion = this.connection.prepareStatement(sql);
-			insercion.executeUpdate();
-			
-			HistorialEstadoTicket het = t.getHistorialEstadoTicket().get(t.getHistorialEstadoTicket().size() - 1);
-			String estT = "'" + het.getEstado().toString() + "'";
-			String sql2 = "SELECT idEstado FROM ESTADO WHERE nombre = " + estT + ";"; 
-			resultadoEstado = sentencia.executeQuery(sql2);
-			
-			resultadoEstado.next();
-			int idEstado = resultadoEstado.getInt(1);
-			String userName = "'" + het.getActor().getNombreUsuario() + "'";
-			String nextValor = "('" + '"' + "idasignado" + '"' + "')";	//('"idasignado"')
-			hora = "'" + het.getFechaInicio().getHour() + ':' + het.getFechaInicio().getMinute() + ':' +het.getFechaInicio().getSecond() + "'";
-			fecha = "'" + het.getFechaInicio().getYear() + '-' + het.getFechaInicio().getMonthValue() + '-' + het.getFechaInicio().getDayOfMonth() + "'";
-			
-			
-			String sql3 = "INSERT INTO TicketEstaEnEstado VALUES (nextval" + nextValor + ',' + fecha + ',' + hora + ", null, null, " + idEstado + ',' + t.getNroTicket() + ',' + userName + ");";
-			insercion = this.connection.prepareStatement(sql3);
-			insercion.executeUpdate();
-			
-			HistorialClasificacion hec = t.getHistorialClasificacion().get(t.getHistorialClasificacion().size() - 1);
-			String clasT = "'" + hec.getClasificacion().getNombre() + "'";
-			String sql4 = "SELECT idClasificacion FROM CLASIFICACION WHERE nombre = " + clasT + ';';
-			resultadoClasificacion = sentencia.executeQuery(sql4);
-			
-			resultadoClasificacion.next();
-			int idClasificacion = resultadoClasificacion.getInt(1);
-			userName = "'" + hec.getActor().getNombreUsuario() + "'";
-			hora = "'" + hec.getFechaInicio().getHour() + ':' + hec.getFechaInicio().getMinute() + ':' + hec.getFechaInicio().getSecond() + "'";
-			fecha = "'" + hec.getFechaInicio().getYear() + '-' + hec.getFechaInicio().getMonthValue() + '-' + hec.getFechaInicio().getDayOfMonth() + "'";
-			nextValor = "('" + '"' + "idclasificado" + '"' + "')";	//('"idclasificado"')
-			
-			String sql5 = "INSERT INTO ClasificacionPerteneceATicket VALUES (nextval" + nextValor + ',' + fecha + ',' + hora + ", null, null, " + idClasificacion + ',' + t.getNroTicket() + ',' + userName + ");";
-			insercion = this.connection.prepareStatement(sql5);
-			insercion.executeUpdate();
+			if(!update) {
+				Statement sentencia = this.connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_READ_ONLY);
+				PreparedStatement actualizacion;
+				ResultSet resultadoEstado;
+				ResultSet resultadoClasificacion;
+				String hora = "'" + t.getFechaApertura().getHour() + ':' + t.getFechaApertura().getMinute() + ':' + t.getFechaApertura().getSecond() + "'";
+				String fecha = "'" + t.getFechaApertura().getYear() + '-' + t.getFechaApertura().getMonthValue() + '-' + t.getFechaApertura().getDayOfMonth() + "'";
+				String desc = "'" + t.getDescripcion() + "'";
+				String obs = "'" + t.getObservaciones() + "'";
+				String nroL = "'" + t.getDemandante().getNroLegajo() + "'";
+				
+				String sql = "INSERT INTO TICKET VALUES (" + t.getNroTicket() + ',' + desc + ',' + obs + ',' + fecha + ',' + hora + ", 0," + nroL + ");";
+				actualizacion = this.connection.prepareStatement(sql);
+				actualizacion.executeUpdate();
+				
+				HistorialEstadoTicket het = t.getHistorialEstadoTicket().get(t.getHistorialEstadoTicket().size() - 1);
+				String estT = "'" + het.getEstado().toString() + "'";
+				String sql2 = "SELECT idEstado FROM ESTADO WHERE nombre = " + estT + ";"; 
+				resultadoEstado = sentencia.executeQuery(sql2);
+				
+				resultadoEstado.next();
+				int idEstado = resultadoEstado.getInt(1);
+				String userName = "'" + het.getActor().getNombreUsuario() + "'";
+				String nextValor = "('" + '"' + "idasignado" + '"' + "')";	//('"idasignado"')
+				hora = "'" + het.getFechaInicio().getHour() + ':' + het.getFechaInicio().getMinute() + ':' +het.getFechaInicio().getSecond() + "'";
+				fecha = "'" + het.getFechaInicio().getYear() + '-' + het.getFechaInicio().getMonthValue() + '-' + het.getFechaInicio().getDayOfMonth() + "'";
+				
+				
+				String sql3 = "INSERT INTO TicketEstaEnEstado VALUES (nextval" + nextValor + ',' + fecha + ',' + hora + ", null, null, " + idEstado + ',' + t.getNroTicket() + ',' + userName + ");";
+				actualizacion = this.connection.prepareStatement(sql3);
+				actualizacion.executeUpdate();
+				
+				HistorialClasificacion hec = t.getHistorialClasificacion().get(t.getHistorialClasificacion().size() - 1);
+				String clasT = "'" + hec.getClasificacion().getNombre() + "'";
+				String sql4 = "SELECT idClasificacion FROM CLASIFICACION WHERE nombre = " + clasT + ';';
+				resultadoClasificacion = sentencia.executeQuery(sql4);
+				
+				resultadoClasificacion.next();
+				int idClasificacion = resultadoClasificacion.getInt(1);
+				userName = "'" + hec.getActor().getNombreUsuario() + "'";
+				hora = "'" + hec.getFechaInicio().getHour() + ':' + hec.getFechaInicio().getMinute() + ':' + hec.getFechaInicio().getSecond() + "'";
+				fecha = "'" + hec.getFechaInicio().getYear() + '-' + hec.getFechaInicio().getMonthValue() + '-' + hec.getFechaInicio().getDayOfMonth() + "'";
+				nextValor = "('" + '"' + "idclasificado" + '"' + "')";	//('"idclasificado"')
+				
+				String sql5 = "INSERT INTO ClasificacionPerteneceATicket VALUES (nextval" + nextValor + ',' + fecha + ',' + hora + ", null, null, " + idClasificacion + ',' + t.getNroTicket() + ',' + userName + ");";
+				actualizacion = this.connection.prepareStatement(sql5);
+				actualizacion.executeUpdate();
+				
+				userName = "'" + t.getActorMesa().getNombreUsuario() + "'";
+				String sql6 = "INSERT INTO UsuarioCreaTicket VALUES (" + userName + ',' + t.getNroTicket() + ");";
+				actualizacion = this.connection.prepareStatement(sql6);
+				actualizacion.executeUpdate();
+			}
+			else {
+				Statement sentencia = this.connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_READ_ONLY);
+				PreparedStatement actualizacion;
+				ResultSet resultadoEstado;
+				ResultSet resultadoClasificacion;
+				String hora = "'" + t.getFechaApertura().getHour() + ':' + t.getFechaApertura().getMinute() + ':' + t.getFechaApertura().getSecond() + "'";
+				String fecha = "'" + t.getFechaApertura().getYear() + '-' + t.getFechaApertura().getMonthValue() + '-' + t.getFechaApertura().getDayOfMonth() + "'";
+				String desc = "'" + t.getDescripcion() + "'";
+				String obs = "'" + t.getObservaciones() + "'";
+				String nroL = "'" + t.getDemandante().getNroLegajo() + "'";
+				
+				String sql = "INSERT INTO TICKET VALUES (" + t.getNroTicket() + ',' + desc + ',' + obs + ',' + fecha + ',' + hora + ", 0," + nroL + ");";
+				actualizacion = this.connection.prepareStatement(sql);
+				actualizacion.executeUpdate();
+				
+				HistorialEstadoTicket het = t.getHistorialEstadoTicket().get(t.getHistorialEstadoTicket().size() - 1);
+				String estT = "'" + het.getEstado().toString() + "'";
+				String sql2 = "SELECT idEstado FROM ESTADO WHERE nombre = " + estT + ";"; 
+				resultadoEstado = sentencia.executeQuery(sql2);
+				
+				resultadoEstado.next();
+				int idEstado = resultadoEstado.getInt(1);
+				String userName = "'" + het.getActor().getNombreUsuario() + "'";
+				String nextValor = "('" + '"' + "idasignado" + '"' + "')";	//('"idasignado"')
+				hora = "'" + het.getFechaInicio().getHour() + ':' + het.getFechaInicio().getMinute() + ':' +het.getFechaInicio().getSecond() + "'";
+				fecha = "'" + het.getFechaInicio().getYear() + '-' + het.getFechaInicio().getMonthValue() + '-' + het.getFechaInicio().getDayOfMonth() + "'";
+				
+				
+				String sql3 = "INSERT INTO TicketEstaEnEstado VALUES (nextval" + nextValor + ',' + fecha + ',' + hora + ", null, null, " + idEstado + ',' + t.getNroTicket() + ',' + userName + ");";
+				actualizacion = this.connection.prepareStatement(sql3);
+				actualizacion.executeUpdate();
+				
+				HistorialClasificacion hec = t.getHistorialClasificacion().get(t.getHistorialClasificacion().size() - 1);
+				String clasT = "'" + hec.getClasificacion().getNombre() + "'";
+				String sql4 = "SELECT idClasificacion FROM CLASIFICACION WHERE nombre = " + clasT + ';';
+				resultadoClasificacion = sentencia.executeQuery(sql4);
+				
+				resultadoClasificacion.next();
+				int idClasificacion = resultadoClasificacion.getInt(1);
+				userName = "'" + hec.getActor().getNombreUsuario() + "'";
+				hora = "'" + hec.getFechaInicio().getHour() + ':' + hec.getFechaInicio().getMinute() + ':' + hec.getFechaInicio().getSecond() + "'";
+				fecha = "'" + hec.getFechaInicio().getYear() + '-' + hec.getFechaInicio().getMonthValue() + '-' + hec.getFechaInicio().getDayOfMonth() + "'";
+				nextValor = "('" + '"' + "idclasificado" + '"' + "')";	//('"idclasificado"')
+				
+				String sql5 = "INSERT INTO ClasificacionPerteneceATicket VALUES (nextval" + nextValor + ',' + fecha + ',' + hora + ", null, null, " + idClasificacion + ',' + t.getNroTicket() + ',' + userName + ");";
+				actualizacion = this.connection.prepareStatement(sql5);
+				actualizacion.executeUpdate();
+				
+				userName = "'" + t.getActorMesa().getNombreUsuario() + "'";
+				String sql6 = "INSERT INTO UsuarioCreaTicket VALUES (" + userName + ',' + t.getNroTicket() + ");";
+				actualizacion = this.connection.prepareStatement(sql6);
+				actualizacion.executeUpdate();
+			}
 		}
 		catch(java.sql.SQLException sqle) {
 			System.out.println("Error al guardar");
@@ -346,7 +406,6 @@ public class GestorDB {
 				for(Clasificacion c : listaC) {
 					if(c.getNombre().equals(resultadoTicket.getString(6))) {
 						clas = c;
-						System.out.println("Encontro la clasificacion");
 					}
 				}
 				hc = new HistorialClasificacion(this.castearFechaYHora(resultadoTicket.getString(1), resultadoTicket.getString(2)), clas, t, user);

@@ -56,7 +56,7 @@ public class GestorTicket {
 		
 		
 		gestorDB.connectDatabase();
-		gestorDB.guardarTicket(t);
+		gestorDB.guardarTicket(t, false);
 		gestorDB.cerrarConexion();
 		
 	}
@@ -88,7 +88,7 @@ public class GestorTicket {
 		GestorDB gestorDB = new GestorDB();
 		
 		gestorDB.connectDatabase();
-		gestorDB.guardarTicket(t);
+		gestorDB.guardarTicket(t, true);
 		gestorDB.cerrarConexion();
 	}
 	
@@ -123,7 +123,7 @@ public class GestorTicket {
 		
 		GestorDB gestorDB = new GestorDB();
 		gestorDB.connectDatabase();
-		gestorDB.guardarTicket(t);
+		gestorDB.guardarTicket(t, true);
 		gestorDB.cerrarConexion();	
 	}
 	
@@ -156,7 +156,7 @@ public class GestorTicket {
 		
 		GestorDB gestorDB = new GestorDB();
 		gestorDB.connectDatabase();
-		gestorDB.guardarTicket(t);
+		gestorDB.guardarTicket(t, true);
 		gestorDB.cerrarConexion();
 	}
 
