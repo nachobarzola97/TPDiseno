@@ -301,6 +301,8 @@ public class GestorDB {
 			GrupoResolucion gr;
 			HistorialEstadoTicket het;
 			HistorialClasificacion hc;
+			List<HistorialEstadoTicket> listaHistorialEstado = new ArrayList<HistorialEstadoTicket>();
+			List<HistorialClasificacion> listaClasificacion = new ArrayList<HistorialClasificacion>();
 			String sql = "SELECT T.descripcion, T.observaciones, T.fechaApertura, T.horaApertura, T.tiempoEnMesa, E.nroLegajo, E.nombre, E.telefonoDirecto, E.telefonoInterno, E.cargo, D.calle, D.numero, D.piso, D.oficina, D.ciudad, D.provincia, U.nombreUsuario, U.password, G.idGrupo, G.nombre, G.estado, G.descripcion FROM TICKET T, EMPLEADO E, DIRECCION D, USUARIO U, GRUPORESOLUCION G, UsuarioCreaTicket UCT WHERE T.nroLegajo = E.nroLegajo AND E.idDireccion = D.idDireccion AND T.nroTicket = UCT.nroTicket AND UCT.nombreUsuario = U.nombreUsuario AND U.idGrupo = G.idGrupo AND T.nroTicket = " + nroTicket + ';';
 			ResultSet resultadoTicket; 
 			Statement sentencia = this.connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_READ_ONLY);				
@@ -319,6 +321,16 @@ public class GestorDB {
 			gr = new GrupoResolucion(resultadoTicket.getInt(19), resultadoTicket.getString(20), EstadoGrupoResolucion.valueOf(resultadoTicket.getString(21)), resultadoTicket.getString(22));
 			user = new Usuario(resultadoTicket.getString(17), resultadoTicket.getString(18), gr);
 			t.setActorMesa(user);
+			
+			String sql2 = "SELECT TEEE.fechaInicio, TEEE.horaInicio, TEEE.fechaFin, TEEE.horaFin, E.nombre, U.nombreUsuario, U.password, G.idGrupo, G.nombre, G.estado, G.descripcion FROM TicketEstaEnEstado TEEE, USUARIO U, GRUPORESOLUCION G, ESTADO E WHERE TEEE.nombreUsuario = U.nombreUsuario AND TEEE.idEstado = E.idEstado AND U.idGrupo = G.idGrupo AND TEEE.nroTicket = " + nroTicket + ';';
+			resultadoTicket = sentencia.executeQuery(sql2);
+			
+			while(resultadoTicket.next()) {	
+				gr = new GrupoResolucion(resultadoTicket.getInt(8), resultadoTicket.getString(9), EstadoGrupoResolucion.valueOf(resultadoTicket.getString(10)), resultadoTicket.getString(11));
+				user = new Usuario(resultadoTicket.getString(6), resultadoTicket.getString(7), gr);
+				//het = new HistorialEstadoTicket(this.castearFechaYHora(resultadoTicket.getString(1), resultadoTicket.getString(2)), this.castearFechaYHora(resultadoTicket.getString(3), resultadoTicket.getString(4)), EstadoTicket.valueOf(resultadoTicket.getString(5)), t, user); //TODO: para proxima entrega
+				het = new HistorialEstadoTicket(this.castearFechaYHora(resultadoTicket.getString(1), resultadoTicket.getString(2)), EstadoTicket.valueOf(resultadoTicket.getString(5)), t, user);
+			}
 		}
 		catch(java.sql.SQLException sqle) {
 			System.out.println("Error al seleccionar");
