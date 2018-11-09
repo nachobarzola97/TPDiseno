@@ -303,7 +303,8 @@ public class GestorDB {
 				String obs = "'" + t.getObservaciones() + "'";
 				String nroL = "'" + t.getDemandante().getNroLegajo() + "'";
 				
-				String sql = "INSERT INTO TICKET VALUES (" + t.getNroTicket() + ',' + desc + ',' + obs + ',' + fecha + ',' + hora + ", 0," + nroL + ");";
+				String sql = "UPDATE TICKET SET descripcion = " + desc + ',' + "observaciones = " + obs + ',' + "fechaApertura = " + fecha + ',' + "horaApertura = " + hora + "tiempoEnMesa = " + t.getTiempoEnMesa() + ',' + "nroLegajo" + nroL + " WHERE nroTicket = " + t.getNroTicket() + ';';
+				System.out.println("update 1: "+sql);
 				actualizacion = this.connection.prepareStatement(sql);
 				actualizacion.executeUpdate();
 				
@@ -315,12 +316,12 @@ public class GestorDB {
 				resultadoEstado.next();
 				int idEstado = resultadoEstado.getInt(1);
 				String userName = "'" + het.getActor().getNombreUsuario() + "'";
-				String nextValor = "('" + '"' + "idasignado" + '"' + "')";	//('"idasignado"')
 				hora = "'" + het.getFechaInicio().getHour() + ':' + het.getFechaInicio().getMinute() + ':' +het.getFechaInicio().getSecond() + "'";
 				fecha = "'" + het.getFechaInicio().getYear() + '-' + het.getFechaInicio().getMonthValue() + '-' + het.getFechaInicio().getDayOfMonth() + "'";
 				
 				
-				String sql3 = "INSERT INTO TicketEstaEnEstado VALUES (nextval" + nextValor + ',' + fecha + ',' + hora + ", null, null, " + idEstado + ',' + t.getNroTicket() + ',' + userName + ");";
+				String sql3 = "UPDATE TicketEstaEnEstado SET fechaInicio = " + fecha + ',' + "horaInicio = " + hora + "idEstado = " + idEstado + "nombreUsuario = " + userName + "WHERE nroTicket = " + t.getNroTicket() + ';';
+				System.out.println("update 2: "+sql3);
 				actualizacion = this.connection.prepareStatement(sql3);
 				actualizacion.executeUpdate();
 				
@@ -334,14 +335,15 @@ public class GestorDB {
 				userName = "'" + hec.getActor().getNombreUsuario() + "'";
 				hora = "'" + hec.getFechaInicio().getHour() + ':' + hec.getFechaInicio().getMinute() + ':' + hec.getFechaInicio().getSecond() + "'";
 				fecha = "'" + hec.getFechaInicio().getYear() + '-' + hec.getFechaInicio().getMonthValue() + '-' + hec.getFechaInicio().getDayOfMonth() + "'";
-				nextValor = "('" + '"' + "idclasificado" + '"' + "')";	//('"idclasificado"')
 				
-				String sql5 = "INSERT INTO ClasificacionPerteneceATicket VALUES (nextval" + nextValor + ',' + fecha + ',' + hora + ", null, null, " + idClasificacion + ',' + t.getNroTicket() + ',' + userName + ");";
+				String sql5 = "UPDATE ClasificacionPerteneceATicket SET fechaInicio = " + fecha + ',' + "horaInicio = " + hora + ',' + "idClasificacion = " + idClasificacion + ',' + "nombreUsuario = " + userName + "WHERE nroTicket = " + t.getNroTicket() + ';';
+				System.out.println("update 3: "+sql5);
 				actualizacion = this.connection.prepareStatement(sql5);
 				actualizacion.executeUpdate();
 				
 				userName = "'" + t.getActorMesa().getNombreUsuario() + "'";
-				String sql6 = "INSERT INTO UsuarioCreaTicket VALUES (" + userName + ',' + t.getNroTicket() + ");";
+				String sql6 = "UPDATE UsuarioCreaTicket SET nombreUsuario = " + userName + " WHERE nroTicket = " + t.getNroTicket() + ';';
+				System.out.println("update 4: "+sql6);
 				actualizacion = this.connection.prepareStatement(sql6);
 				actualizacion.executeUpdate();
 			}
