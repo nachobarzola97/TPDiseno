@@ -54,7 +54,6 @@ public class MenuPrincipalMesa extends JFrame {
 		contentPane.add(menu, "3");
 		contentPane.add(registroA,"1");
 		contentPane.add(registroB,"2");
-		System.out.println();
 	}
 	
 	public void cambiarVentana(int n,DTOTicket dtoTicket) {

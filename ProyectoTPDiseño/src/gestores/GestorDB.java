@@ -193,7 +193,7 @@ public class GestorDB {
 		Empleado emp = new Empleado();
 		try{
 			Direccion dir;
-			String sql = "SELECT E.nroLegajo, E.nombre, E.telefonoDirecto, E.telefonoInterno, E.cargo, D.calle, D.numero, D.piso, D.oficina, D.ciudad, D.provincia FROM EMPLEADO E, DIRECCION D WHERE E.idDireccion = D.idDireccion;";
+			String sql = "SELECT E.nroLegajo, E.nombre, E.telefonoDirecto, E.telefonoInterno, E.cargo, D.calle, D.numero, D.piso, D.oficina, D.ciudad, D.provincia FROM EMPLEADO E, DIRECCION D WHERE E.idDireccion = D.idDireccion AND E.nroLegajo = '" + legajo + "';";
 			ResultSet resultadoEmpleado;
 			Statement sentencia = this.connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_READ_ONLY);				
 			resultadoEmpleado = sentencia.executeQuery(sql);
@@ -247,7 +247,7 @@ public class GestorDB {
 			String fecha = "'" + t.getFechaApertura().getYear() + '-' + t.getFechaApertura().getMonthValue() + '-' + t.getFechaApertura().getDayOfMonth() + "'";
 			String desc = "'" + t.getDescripcion() + "'";
 			String obs = "'" + t.getDescripcion() + "'";
-			String nroL = "'" + t.getDemandante().getNroLegajo() + "'";  //TODO: falta una condicion en el where de la consulta existe empleado
+			String nroL = "'" + t.getDemandante().getNroLegajo() + "'";
 			
 			String sql = "INSERT INTO TICKET VALUES (" + t.getNroTicket() + ',' + desc + ',' + obs + ',' + fecha + ',' + hora + ", 0," + nroL + ");";
 			insercion = this.connection.prepareStatement(sql);
@@ -295,7 +295,7 @@ public class GestorDB {
 	public Ticket recuperarTicket(int nroTicket) {
 		Ticket t = new Ticket();
 		try{
-			String sql = "SELECT observaciones, fechaApertura, horaApertura FROM Ticket WHERE nroTicket = 1;";
+			String sql = "SELECT observaciones, fechaApertura, horaApertura FROM Ticket WHERE nroTicket = " + nroTicket + ';';
 			ResultSet resultadoTicket; 
 			Statement sentencia = this.connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_READ_ONLY);				
 			resultadoTicket = sentencia.executeQuery(sql);

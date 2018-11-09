@@ -37,7 +37,6 @@ public class RegistroTicketB extends JPanel {
 		
 		this.gestorDB.connectDatabase();
 		List<Clasificacion> clasificacionesTicket = this.gestorDB.seleccionarClasificaciones();
-		this.gestorDB.cerrarConexion();
 		
 		String[] estadosTicket = {"AbiertoEnMesaDeAyuda","AbiertoDerivadoAGrupo","SolucionadoALaEsperaOk","Cerrado"};
 		
@@ -134,9 +133,7 @@ public class RegistroTicketB extends JPanel {
 				}
 				else {
 					int nroTicket = frame.getTicketEnProceso().getNroTicket();
-					GestorDB gestorDB = new GestorDB();
 					
-					gestorDB.connectDatabase();
 					Ticket t = gestorDB.recuperarTicket(nroTicket);
 					gestorDB.cerrarConexion();
 					
