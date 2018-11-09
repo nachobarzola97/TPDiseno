@@ -12,7 +12,7 @@ public class HistorialClasificacion {
 		
 	}
 
-	public HistorialClasificacion(LocalDateTime fechaInicio, Clasificacion clasificacion, Usuario actor) {
+	public HistorialClasificacion(LocalDateTime fechaInicio, Clasificacion clasificacion, Ticket t, Usuario actor) {
 		super();
 		this.fechaInicio = fechaInicio;
 		this.clasificacion = clasificacion;

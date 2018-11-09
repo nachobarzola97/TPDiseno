@@ -299,9 +299,10 @@ public class GestorDB {
 			Usuario user;
 			Direccion dir;
 			GrupoResolucion gr;
+			Clasificacion clas;
 			HistorialEstadoTicket het;
 			HistorialClasificacion hc;
-			List<HistorialEstadoTicket> listaHistorialEstado = new ArrayList<HistorialEstadoTicket>();
+			List<HistorialEstadoTicket> listaEstado = new ArrayList<HistorialEstadoTicket>();
 			List<HistorialClasificacion> listaClasificacion = new ArrayList<HistorialClasificacion>();
 			String sql = "SELECT T.descripcion, T.observaciones, T.fechaApertura, T.horaApertura, T.tiempoEnMesa, E.nroLegajo, E.nombre, E.telefonoDirecto, E.telefonoInterno, E.cargo, D.calle, D.numero, D.piso, D.oficina, D.ciudad, D.provincia, U.nombreUsuario, U.password, G.idGrupo, G.nombre, G.estado, G.descripcion FROM TICKET T, EMPLEADO E, DIRECCION D, USUARIO U, GRUPORESOLUCION G, UsuarioCreaTicket UCT WHERE T.nroLegajo = E.nroLegajo AND E.idDireccion = D.idDireccion AND T.nroTicket = UCT.nroTicket AND UCT.nombreUsuario = U.nombreUsuario AND U.idGrupo = G.idGrupo AND T.nroTicket = " + nroTicket + ';';
 			ResultSet resultadoTicket; 
@@ -330,7 +331,21 @@ public class GestorDB {
 				user = new Usuario(resultadoTicket.getString(6), resultadoTicket.getString(7), gr);
 				//het = new HistorialEstadoTicket(this.castearFechaYHora(resultadoTicket.getString(1), resultadoTicket.getString(2)), this.castearFechaYHora(resultadoTicket.getString(3), resultadoTicket.getString(4)), EstadoTicket.valueOf(resultadoTicket.getString(5)), t, user); //TODO: para proxima entrega
 				het = new HistorialEstadoTicket(this.castearFechaYHora(resultadoTicket.getString(1), resultadoTicket.getString(2)), EstadoTicket.valueOf(resultadoTicket.getString(5)), t, user);
+				listaEstado.add(het);
 			}
+			t.setHistorialEstadoTicket(listaEstado);
+			
+			String sql3 = "SELECT CPAT.fechaInicio, CPAT.horaInicio, CPAT.fechaFin, CPAT.horaFin, C.idClasificacion, C.nombre, C.estado, C.descripcion, U.nombreUsuario, U.password, G.idGrupo, G.nombre, G.estado, G.descripcion FROM ClasificacionPerteneceATicket CPAT, CLASIFICACION C, USUARIO U, GRUPORESOLUCION G WHERE CPAT.idClasificacion = C.idClasificacion AND CPAT.nombreUsuario = U.nombreUsuario AND U.idGrupo = G.idGrupo AND CPAT.nroTicket = " + nroTicket + ';';
+			resultadoTicket = sentencia.executeQuery(sql3);
+			
+			while(resultadoTicket.next()) {	
+				gr = new GrupoResolucion(resultadoTicket.getInt(11), resultadoTicket.getString(12), EstadoGrupoResolucion.valueOf(resultadoTicket.getString(13)), resultadoTicket.getString(14));
+				user = new Usuario(resultadoTicket.getString(9), resultadoTicket.getString(10), gr);
+				clas = new Clasificacion(); //TODO: falta crear clasificacion con todas las putas cosas
+				hc = new HistorialClasificacion(this.castearFechaYHora(resultadoTicket.getString(1), resultadoTicket.getString(2)), clas, t, user);
+				listaClasificacion.add(hc);
+			}
+			t.setHistorialClasificacion(listaClasificacion);
 		}
 		catch(java.sql.SQLException sqle) {
 			System.out.println("Error al seleccionar");
