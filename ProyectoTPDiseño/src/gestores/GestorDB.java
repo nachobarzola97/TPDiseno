@@ -32,13 +32,6 @@ public class GestorDB {
 				connection = DriverManager.getConnection(
 				        "jdbc:postgresql://localhost/postgres",
 				        "postgres", "TF135");
-				boolean valido = connection.isValid(50000);
-				if(valido) {
-					System.out.println("Test DB OK");
-				}
-				else {
-					System.out.println("Test DB fail");
-				}
 			}
 			catch (java.sql.SQLException sqle) {
 				System.out.println("Error al conectarse a la BD");
@@ -303,8 +296,7 @@ public class GestorDB {
 				String obs = "'" + t.getObservaciones() + "'";
 				String nroL = "'" + t.getDemandante().getNroLegajo() + "'";
 				
-				String sql = "UPDATE TICKET SET descripcion = " + desc + ',' + "observaciones = " + obs + ',' + "fechaApertura = " + fecha + ',' + "horaApertura = " + hora + "tiempoEnMesa = " + t.getTiempoEnMesa() + ',' + "nroLegajo" + nroL + " WHERE nroTicket = " + t.getNroTicket() + ';';
-				System.out.println("update 1: "+sql);
+				String sql = "UPDATE TICKET SET descripcion = " + desc + ',' + "observaciones = " + obs + ',' + "fechaApertura = " + fecha + ',' + "horaApertura = " + hora + ',' + "tiempoEnMesa = " + t.getTiempoEnMesa() + ',' + "nroLegajo = " + nroL + " WHERE nroTicket = " + t.getNroTicket() + ';';
 				actualizacion = this.connection.prepareStatement(sql);
 				actualizacion.executeUpdate();
 				
@@ -320,8 +312,7 @@ public class GestorDB {
 				fecha = "'" + het.getFechaInicio().getYear() + '-' + het.getFechaInicio().getMonthValue() + '-' + het.getFechaInicio().getDayOfMonth() + "'";
 				
 				
-				String sql3 = "UPDATE TicketEstaEnEstado SET fechaInicio = " + fecha + ',' + "horaInicio = " + hora + "idEstado = " + idEstado + "nombreUsuario = " + userName + "WHERE nroTicket = " + t.getNroTicket() + ';';
-				System.out.println("update 2: "+sql3);
+				String sql3 = "UPDATE TicketEstaEnEstado SET fechaInicio = " + fecha + ',' + "horaInicio = " + hora + ',' +"idEstado = " + idEstado + ',' + "nombreUsuario = " + userName + " WHERE nroTicket = " + t.getNroTicket() + ';';
 				actualizacion = this.connection.prepareStatement(sql3);
 				actualizacion.executeUpdate();
 				
@@ -336,14 +327,12 @@ public class GestorDB {
 				hora = "'" + hec.getFechaInicio().getHour() + ':' + hec.getFechaInicio().getMinute() + ':' + hec.getFechaInicio().getSecond() + "'";
 				fecha = "'" + hec.getFechaInicio().getYear() + '-' + hec.getFechaInicio().getMonthValue() + '-' + hec.getFechaInicio().getDayOfMonth() + "'";
 				
-				String sql5 = "UPDATE ClasificacionPerteneceATicket SET fechaInicio = " + fecha + ',' + "horaInicio = " + hora + ',' + "idClasificacion = " + idClasificacion + ',' + "nombreUsuario = " + userName + "WHERE nroTicket = " + t.getNroTicket() + ';';
-				System.out.println("update 3: "+sql5);
+				String sql5 = "UPDATE ClasificacionPerteneceATicket SET fechaInicio = " + fecha + ',' + "horaInicio = " + hora + ',' + "idClasificacion = " + idClasificacion + ',' + "nombreUsuario = " + userName + " WHERE nroTicket = " + t.getNroTicket() + ';';
 				actualizacion = this.connection.prepareStatement(sql5);
 				actualizacion.executeUpdate();
 				
 				userName = "'" + t.getActorMesa().getNombreUsuario() + "'";
 				String sql6 = "UPDATE UsuarioCreaTicket SET nombreUsuario = " + userName + " WHERE nroTicket = " + t.getNroTicket() + ';';
-				System.out.println("update 4: "+sql6);
 				actualizacion = this.connection.prepareStatement(sql6);
 				actualizacion.executeUpdate();
 			}

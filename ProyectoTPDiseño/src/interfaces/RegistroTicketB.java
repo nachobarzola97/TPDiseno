@@ -89,6 +89,11 @@ public class RegistroTicketB extends JPanel {
 		
 		JComboBox comboBoxEstado = new JComboBox(estadosTicket);
 		comboBoxEstado.setBounds(179, 118, 183, 20);
+		comboBoxEstado.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		this.add(comboBoxEstado);
 		
 		JComboBoxClasificacion.addActionListener(new ActionListener() {
