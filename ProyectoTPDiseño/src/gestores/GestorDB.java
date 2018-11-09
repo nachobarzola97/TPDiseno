@@ -341,7 +341,14 @@ public class GestorDB {
 			while(resultadoTicket.next()) {	
 				gr = new GrupoResolucion(resultadoTicket.getInt(11), resultadoTicket.getString(12), EstadoGrupoResolucion.valueOf(resultadoTicket.getString(13)), resultadoTicket.getString(14));
 				user = new Usuario(resultadoTicket.getString(9), resultadoTicket.getString(10), gr);
-				clas = new Clasificacion(); //TODO: falta crear clasificacion con todas las putas cosas
+				List<Clasificacion> listaC = this.seleccionarClasificaciones();
+				clas = new Clasificacion();
+				for(Clasificacion c : listaC) {
+					if(c.getNombre().equals(resultadoTicket.getString(6))) {
+						clas = c;
+						System.out.println("Encontro la clasificacion");
+					}
+				}
 				hc = new HistorialClasificacion(this.castearFechaYHora(resultadoTicket.getString(1), resultadoTicket.getString(2)), clas, t, user);
 				listaClasificacion.add(hc);
 			}
