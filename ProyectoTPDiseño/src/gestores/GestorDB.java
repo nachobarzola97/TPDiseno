@@ -446,5 +446,31 @@ public class GestorDB {
 		LocalDateTime fechaYHora = LocalDateTime.of(a, me, d, h, mi, s);
 		return fechaYHora;
 	}
+	
+	
+	public List<String> getNombreClasificaciones(){
+		List<String> lista = new ArrayList<String>();
+		
+		try{
+			String sql = "SELECT nombre FROM CLASIFICACION;";
+			ResultSet resultadoClasificaciones;
+			Statement sentencia = this.connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_READ_ONLY);				
+			resultadoClasificaciones = sentencia.executeQuery(sql);
+			
+			
+			while (resultadoClasificaciones.next()) {
+				lista.add(resultadoClasificaciones.getString(1));
+			}
+			
+			
+			}
+		
+		catch(java.sql.SQLException sqle) {
+			System.out.println("Error al seleccionar");
+			sqle.printStackTrace();
+		}
+		return lista;
+		
+	}
 }
 

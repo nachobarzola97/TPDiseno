@@ -20,6 +20,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.lang.Exception;
 
 import logica.*;
@@ -39,9 +40,10 @@ public class RegistroTicketA extends JPanel {
 	 */
 	public RegistroTicketA(JFrame f) {
 		this.frame=f;
-		
-		ArrayList<String> clasificaciones = new ArrayList<String>();
-		clasificaciones.add("Default");
+		//TODO: Falta agregar esta logica al driagrama de secuencia
+		GestorClasificacion gestorC = new GestorClasificacion();
+		List<String> clasificaciones = gestorC.obtenerNombreClasificaciones();
+		 
 		setLayout(null);
 
 		JLabel lblNmeroDeLegajo = new JLabel("N\u00FAmero de legajo");

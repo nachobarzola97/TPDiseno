@@ -1,4 +1,7 @@
 package gestores;
+import java.util.ArrayList;
+import java.util.List;
+
 import logica.Clasificacion;
 
 public class GestorClasificacion {
@@ -13,6 +16,17 @@ public class GestorClasificacion {
 		gestorDB.cerrarConexion();
 		return c;
 		
+	}
+	
+	public List<String> obtenerNombreClasificaciones(){
+		GestorDB gestorDB = new GestorDB();
+		List<String> lista = new ArrayList<String>();
+		
+		gestorDB.connectDatabase();
+		lista = gestorDB.getNombreClasificaciones();
+		gestorDB.cerrarConexion();
+		
+		return lista;
 	}
 
 }
