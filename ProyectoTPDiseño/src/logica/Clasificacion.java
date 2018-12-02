@@ -13,7 +13,12 @@ public class Clasificacion {
 	private List<GrupoResolucion> grupos;
 	
 	public Clasificacion() {
-		
+		this.grupos = new ArrayList<GrupoResolucion>();
+	}
+	
+	public Clasificacion(int idClasificacion, String nombre) {
+		this.idClasificacion = idClasificacion;
+		this.nombre = nombre;
 	}
 	
 	public Clasificacion(int idClasificacion, String nombre, String descripcion, EstadoClasificacion estado, List<GrupoResolucion> grupos) {
@@ -64,5 +69,8 @@ public class Clasificacion {
 		this.grupos = grupos;
 	}
 	
+	public void agregarGrupo(GrupoResolucion gr) {
+		this.grupos.add(gr);
+	}
 	
 }
