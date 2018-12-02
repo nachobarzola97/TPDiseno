@@ -45,7 +45,7 @@ public class GestorTicket {
 		ht.setActor(usr);
 		
 		GestorClasificacion gestorClasificacion = new GestorClasificacion();
-		Clasificacion clas = gestorClasificacion.seleccionarClasificaciones(dto.getClasificacion());
+		Clasificacion clas = gestorClasificacion.obtenerClasificacion(dto.getClasificacion());
 		
 		HistorialClasificacion hc = new HistorialClasificacion();
 		hc.setClasificacion(clas);
