@@ -31,7 +31,7 @@ public class GestorDB {
 				// Conectamos con la base de datos
 				connection = DriverManager.getConnection(
 				        "jdbc:postgresql://localhost/postgres",
-				        "postgres", "TF135");
+				        "postgres", "1234");
 			}
 			catch (java.sql.SQLException sqle) {
 				System.out.println("Error al conectarse a la BD");
@@ -114,7 +114,7 @@ public class GestorDB {
 	}
 	
 	public Usuario seleccionarUsuario(String userName) {
-		Usuario us = new Usuario();
+		Usuario us = null;
 		try{
 			GrupoResolucion gr;
 			Direccion dir;
@@ -125,6 +125,7 @@ public class GestorDB {
 			
 			while(resultadoUsuario.next()) {
 				if(userName.equals(resultadoUsuario.getString(12))) {
+					us = new Usuario();
 					gr = new GrupoResolucion(resultadoUsuario.getInt(14), resultadoUsuario.getString(15), EstadoGrupoResolucion.valueOf(resultadoUsuario.getString(16)), resultadoUsuario.getString(17));
 					dir = new Direccion(resultadoUsuario.getString(6), resultadoUsuario.getString(7), resultadoUsuario.getString(8),resultadoUsuario.getString(9), resultadoUsuario.getString(10), resultadoUsuario.getString(11));
 					us.setNombreUsuario(resultadoUsuario.getString(12));
@@ -150,7 +151,7 @@ public class GestorDB {
 			Statement sentencia = this.connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_READ_ONLY);				
 			resultadoEmpleado = sentencia.executeQuery(sql);
 			
-			while(resultadoEmpleado.next()) {
+			while(resultadoEmpleado.next() && existe==false) {
 				if(legajo.equals(resultadoEmpleado.getString(1))) {
 					existe = true;
 				}

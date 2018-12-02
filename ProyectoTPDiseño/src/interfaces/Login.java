@@ -11,6 +11,7 @@ import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextPane;
@@ -71,7 +72,7 @@ public class Login extends JFrame {
 		
 		
 		JTextPane textPane = new JTextPane();
-		textPane.setBounds(191, 281, 150, 23);
+		textPane.setBounds(191, 281, 169, 23);
 		contentPane.add(textPane);
 		
 		JLabel lblContrasea = new JLabel("Contrase\u00F1a: ");
@@ -100,20 +101,30 @@ public class Login extends JFrame {
 		JButton btnIniciarSeccin = new JButton("Iniciar sesi\u00F3n");
 		btnIniciarSeccin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				GestorDB gestorDB = new GestorDB();
-				
-				gestorDB.connectDatabase();
-				Usuario usr = gestorDB.seleccionarUsuario(textPane.getText());
-				gestorDB.cerrarConexion();
-				
-				
 				GestorUsuario gestorUsuario = new GestorUsuario();
-				Sesion s= gestorUsuario.setUsuarioLogueado(usr);
+				Usuario usr;
 				
-				MenuPrincipalMesa menu = new MenuPrincipalMesa(s);
-				menu.setVisible(true);
-				frame.dispose();
+				/*TODO: deberia ser validarUsuario(textPane.getText()), si se quiere autenticar
+				con el nombre del usuario*/
+				usr=gestorUsuario.validarUsuario("IgnacioBarzola");
 				
+				//TODO: Una implementacion que no se necesita hacer.
+				//TODO: esta el if en falso 
+				//Validamos el usuario 
+				if(false) {
+					JOptionPane.showMessageDialog(frame,
+							"Usuario inválido",
+						    "Error de autenticación",
+						    JOptionPane.ERROR_MESSAGE);
+					textPane.setText("");
+					passwordField.setText("");	
+				}
+				else {
+					Sesion s= gestorUsuario.setUsuarioLogueado(usr);
+					MenuPrincipalMesa menu = new MenuPrincipalMesa(s);
+					menu.setVisible(true);
+					frame.dispose();
+				}
 				
 				
 			}

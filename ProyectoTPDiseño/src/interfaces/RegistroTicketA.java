@@ -95,7 +95,7 @@ public class RegistroTicketA extends JPanel {
 				}
 				else {
 					GestorSistemaPersonal gestorPersonal = new GestorSistemaPersonal();
-					boolean e = gestorPersonal.consultaEmpleado(nroLegajo.getText());
+					boolean e = gestorPersonal.validarEmpleado(nroLegajo.getText());
 					if(!e) {
 					JOptionPane.showMessageDialog(frame,
 						    "Ingrese un número de legajo válido",

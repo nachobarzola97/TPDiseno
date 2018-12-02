@@ -1,8 +1,6 @@
 package gestores;
 import logica.*;
 
-import logica.Sesion;
-
 public class GestorUsuario {
 	
 	public GestorUsuario() {};
@@ -15,6 +13,17 @@ public class GestorUsuario {
 	public Usuario getUser(Sesion s) {
 		return s.getUser();
 	}
+	
+	public Usuario validarUsuario(String userName) {
+		GestorDB gestorDB = new GestorDB();
+		gestorDB.connectDatabase();
+		Usuario usr = gestorDB.seleccionarUsuario(userName);
+		gestorDB.cerrarConexion();
+		return usr;
+	}
+	
+	
+	
 }
 
 
