@@ -106,8 +106,7 @@ public class Login extends JFrame {
 				
 				/*TODO: deberia ser validarUsuario(textPane.getText()), si se quiere autenticar
 				con el nombre del usuario*/
-				usr=gestorUsuario.validarUsuario("IgnacioBarzola");
-				
+				usr=gestorUsuario.validarUsuario("IgnacioBarzola");			
 				//TODO: Una implementacion que no se necesita hacer.
 				//TODO: esta el if en falso 
 				//Validamos el usuario 
