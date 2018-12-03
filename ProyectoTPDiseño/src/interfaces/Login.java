@@ -103,7 +103,6 @@ public class Login extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				GestorUsuario gestorUsuario = new GestorUsuario();
 				Usuario usr;
-				//
 				/*TODO: deberia ser validarUsuario(textPane.getText()), si se quiere autenticar
 				con el nombre del usuario*/
 				usr=gestorUsuario.validarUsuario("IgnacioBarzola");			
