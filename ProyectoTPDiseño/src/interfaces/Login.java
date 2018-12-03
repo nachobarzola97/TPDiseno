@@ -106,11 +106,11 @@ public class Login extends JFrame {
 				
 				/*TODO: deberia ser validarUsuario(textPane.getText()), si se quiere autenticar
 				con el nombre del usuario*/
-				usr=gestorUsuario.validarUsuario("IgnacioBarzola");			
+				usr=gestorUsuario.validarUsuario(textPane.getText());			
 				//TODO: Una implementacion que no se necesita hacer.
 				//TODO: esta el if en falso 
 				//Validamos el usuario 
-				if(false) {
+				if(usr==null) {
 					JOptionPane.showMessageDialog(frame,
 							"Usuario inválido",
 						    "Error de autenticación",

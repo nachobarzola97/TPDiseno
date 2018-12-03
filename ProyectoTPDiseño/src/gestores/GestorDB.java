@@ -462,7 +462,6 @@ public class GestorDB {
 				lista.add(resultadoClasificaciones.getString(1));
 			}
 			
-			
 			}
 		
 		catch(java.sql.SQLException sqle) {
