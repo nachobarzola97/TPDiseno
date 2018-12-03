@@ -34,8 +34,8 @@ public class RegistroTicketB extends JPanel {
 		this.frame=f;
 		setLayout(null);
 		
+		//TODO: Falta separar la logica de capas de esta interface.
 		this.gestorDB = new GestorDB();
-		
 		this.gestorDB.connectDatabase();
 		List<Clasificacion> clasificacionesTicket = this.gestorDB.seleccionarClasificaciones();
 		
@@ -103,7 +103,6 @@ public class RegistroTicketB extends JPanel {
 					JComboBoxClasificacion.setVisible(false);
 					lblNewLabel_1.setVisible(false);
 					lblNewLabel_2.setVisible(false);
-					
 				}
 			}
 		});
@@ -150,6 +149,7 @@ public class RegistroTicketB extends JPanel {
 						    JOptionPane.ERROR_MESSAGE);
 				}
 				else {
+					//TODO: Separar la logica de capas.
 					int nroTicket = frame.getTicketEnProceso().getNroTicket();
 					
 					Ticket t = gestorDB.recuperarTicket(nroTicket);
@@ -162,6 +162,7 @@ public class RegistroTicketB extends JPanel {
 						gestorTicket.cerrarTicket(t, frame.getSesion());
 					}
 					else if(comboBoxEstado.getSelectedItem()=="Abierto derivado grupo"){
+						//TODO: Si se cambia el comboBoxClasificacion no se guarda en el ticket
 						String grupo=comboBoxGrupo.getSelectedItem().toString();
 						GrupoResolucion g = gestorDB.recuperarGrupo(grupo);
 						
