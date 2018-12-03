@@ -117,6 +117,7 @@ public class Login extends JFrame {
 						    JOptionPane.ERROR_MESSAGE);
 					textPane.setText("");
 					passwordField.setText("");	
+					
 				}
 				else {
 					Sesion s= gestorUsuario.setUsuarioLogueado(usr);
