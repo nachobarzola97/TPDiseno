@@ -103,7 +103,7 @@ public class Login extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				GestorUsuario gestorUsuario = new GestorUsuario();
 				Usuario usr;
-				
+				//
 				/*TODO: deberia ser validarUsuario(textPane.getText()), si se quiere autenticar
 				con el nombre del usuario*/
 				usr=gestorUsuario.validarUsuario("IgnacioBarzola");			
@@ -116,8 +116,7 @@ public class Login extends JFrame {
 						    "Error de autenticación",
 						    JOptionPane.ERROR_MESSAGE);
 					textPane.setText("");
-					passwordField.setText("");	
-					
+					passwordField.setText("");
 				}
 				else {
 					Sesion s= gestorUsuario.setUsuarioLogueado(usr);
