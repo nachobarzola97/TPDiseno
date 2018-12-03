@@ -20,6 +20,7 @@ import java.awt.event.ActionEvent;
 
 import gestores.*;
 import logica.*;
+import logica.util.EstadoTicket;
 
 
 public class RegistroTicketB extends JPanel {
@@ -38,7 +39,7 @@ public class RegistroTicketB extends JPanel {
 		this.gestorDB.connectDatabase();
 		List<Clasificacion> clasificacionesTicket = this.gestorDB.seleccionarClasificaciones();
 		
-		String[] estadosTicket = {"AbiertoEnMesaDeAyuda","AbiertoDerivadoAGrupo","SolucionadoALaEsperaOk","Cerrado"};
+		String[] estadosTicket = {"AbiertoDerivadoAGrupo","Cerrado"};
 		
 		JLabel lblObservaciones = new JLabel("Observaciones");
 		lblObservaciones.setBounds(28, 11, 145, 14);
@@ -91,7 +92,19 @@ public class RegistroTicketB extends JPanel {
 		comboBoxEstado.setBounds(179, 118, 183, 20);
 		comboBoxEstado.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				if(EstadoTicket.AbiertoDerivadoAGrupo.toString().equals((String)comboBoxEstado.getSelectedItem())) {
+					comboBoxGrupo.setVisible(true);
+					JComboBoxClasificacion.setVisible(true);
+					lblNewLabel_1.setVisible(true);
+					lblNewLabel_2.setVisible(true);
+				}
+				else {
+					comboBoxGrupo.setVisible(false);
+					JComboBoxClasificacion.setVisible(false);
+					lblNewLabel_1.setVisible(false);
+					lblNewLabel_2.setVisible(false);
+					
+				}
 			}
 		});
 		this.add(comboBoxEstado);
